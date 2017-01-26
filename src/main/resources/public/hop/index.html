@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hops are not Hipsters</title>
+    <link href='//fonts.googleapis.com/css?family=Signika Negative' rel='stylesheet'>
+    <link rel="stylesheet" href="css/screen.css">
+</head>
+<body>
+
+<img src="img/rocket.png"/>
+
+
+<div id="hops">
+    <form id="addHop" action="#">
+        <div>
+            <label for="title">Title: </label><input id="title" type="text" />
+            <label for="author">Author: </label><input id="author" type="text" />
+            <label for="location">Location: </label><input id="location" type="text" />
+            <label for="type">Type: </label><input id="type" type="text" />
+            <button id="add">Add</button>
+        </div>
+    </form>
+</div>
+
+<script id="hopTemplate" type="text/template">
+    <ul>
+        <li><%= title %></li>
+        <li><%= author %></li>
+        <li><%= location %></li>
+        <li><%= type %></li>
+    </ul>
+
+    <button class="delete">Delete</button>
+</script>
+
+
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/underscore/underscore.js"></script>
+<script src="/lib/backbone/backbone.js"></script>
+<script src="/lib/requirejs/require.js"></script>
+
+<script src="/hop/js/hop.js"></script>
+<script src="/hop/js/library.js"></script>
+<script src="/hop/js/hop.view.js"></script>
+<script src="/hop/js/library.view.js"></script>
+<script src="/hop/js/app.js"></script>
+
+</body>
+</html>

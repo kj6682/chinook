@@ -3,39 +3,84 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Hops are not Hipsters</title>
-    <link href='//fonts.googleapis.com/css?family=Signika Negative' rel='stylesheet'>
-    <link rel="stylesheet" href="css/screen.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="chinook is a hopster client">
+    <meta name="author" content="kj6682">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jumbotron.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/hop.css">
 </head>
 <body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Chinook</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <form class="navbar-form navbar-right">
+          <div class="form-group">
+            <input type="text" placeholder="Email" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Password" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-success">Sign in</button>
+        </form>
+      </div><!--/.navbar-collapse -->
+    </div>
+  </nav>
 
-<img src="img/rocket.png"/>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>
+        <img src="img/rocket.png" class="logo"/>
+        <span>Chinook!</span>
+      </h1>
+      <p>This is a simple client for hopsters.</p>
+    </div>
+  </div>
+  <div class="container">
 
-
-<div id="hops">
-    <form id="addHop" action="#">
-        <div>
-            <label for="title">Title: </label><input id="title" type="text" />
-            <label for="author">Author: </label><input id="author" type="text" />
-            <label for="location">Location: </label><input id="location" type="text" />
-            <label for="type">Type: </label><input id="type" type="text" />
-            <button id="add">Add</button>
-        </div>
-    </form>
-</div>
+      <div  id="hops" class="row">
+        <form id="addHop" action="#" class="form-inline">
+              <div class="form-group">
+                <label for="title">Title: </label>
+                <input id="title" type="text" class="form-control" placeholder="title"/>
+              </div>
+              <div class="form-group">
+                <label for="author">Author: </label>
+                <input id="author" type="text" class="form-control" placeholder="author"/>
+              </div>
+              <div class="form-group">
+                  <label for="location">Location: </label>
+                  <input id="location" type="text" class="form-control" placeholder="location"/>
+              </div>
+              <div class="form-group">
+                  <label for="type">Type: </label>
+                  <input id="type" type="text" class="form-control" placeholder="type"/>
+              </div>
+              <button id="add">Add</button>
+        </form>
+        <!-- hops go here -->
+      </div>
 
 <script id="hopTemplate" type="text/template">
-    <ul>
-        <li><%= title %></li>
-        <li><%= author %></li>
-        <li><%= location %></li>
-        <li><%= type %></li>
-    </ul>
-
-    <button class="delete">Delete</button>
+        <ul>
+            <li><a data-toggle="tooltip" title= "<%= title %>" ><h2><%= title %></h2></a></li>
+            <li><%= author %></li>
+            <li><%= location %></li>
+            <li><%= type %></li>
+        </ul>
+        <button class = "btn btn-default delete">Delete</button>
 </script>
-
-
 <script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/bootstrap/bootstrap.min.js"></script>
 <script src="/lib/underscore/underscore.js"></script>
 <script src="/lib/backbone/backbone.js"></script>
 <script src="/lib/requirejs/require.js"></script>
@@ -45,6 +90,5 @@
 <script src="/hop/js/hop.view.js"></script>
 <script src="/hop/js/library.view.js"></script>
 <script src="/hop/js/app.js"></script>
-
 </body>
 </html>

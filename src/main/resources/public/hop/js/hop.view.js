@@ -23,6 +23,7 @@ app.HopView = Backbone.View.extend({
         // this.el is what we defined in tagName. use $el to get access
         // to jQuery html() function
         this.$el.html( this.template( this.model.toJSON() ));
+        this.$el.addClass('col-md-3');
 
         return this;
     }

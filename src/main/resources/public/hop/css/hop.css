@@ -22,6 +22,29 @@
     border-bottom-style: solid;
     border-right-style: solid;
 }
+.red-hop {
+    background-color: #cc3300;
+}
+
+.purple-hop {
+    background-color: #8f246b;
+}
+
+.dark-purple-hop {
+    background-color: #66194d;
+}
+
+
+.light-purple-hop {
+    background-color:  #faebf5;
+}
+
+.fade-purple-hop {
+    background-color:  #f2e6ff;
+}
+.black-hop {
+    background-color: #14050f;
+}
 
 .hopContainer:hover {
     background-color: #9bc9c7;

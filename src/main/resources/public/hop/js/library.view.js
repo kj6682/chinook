@@ -50,6 +50,6 @@ app.LibraryView = Backbone.View.extend({
         var hopView = new app.HopView({
             model: item
         });
-        this.$el.append( hopView.render().el );
+        this.$el.find("#hopTable").append( hopView.render().el );
     }
 });

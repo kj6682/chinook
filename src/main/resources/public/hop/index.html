@@ -67,41 +67,45 @@
               </div>
               <button id="add">Add</button>
         </form>
-        <div class="hopContainer col-md-3">
-        <a data-toggle="tooltip" title= " title " >
-            <ul>
-                <li><h2>title </h2></li>
-                <li>author author author del casso non andare via</li>
-                <li> location </li>
-                <li> type </li>
-            </ul>
-        </a>
-        <button class = "btn btn-default delete">Delete</button>
-      </div>
-      <div class="hopContainer col-md-3">
-      <a data-toggle="tooltip" title= " title " >
-          <ul>
-              <li><h2> title </h2></li>
-              <li> author </li>
-              <li> location </li>
-              <li> type </li>
-          </ul>
-      </a>
-      <button class = "btn btn-default delete">Delete</button>
-    </div>
-        <!-- hops go here -->
-      </div>
 
+        <div  class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>title</th>
+                  <th>author</th>
+                  <th>location</th>
+                  <th>type</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="hopTable">
+                <!-- hops go here -->
+              </tbody>
+            </table>
+          </div>
+
+
+      </div>
+  </div>
+<script id="nohopTemplate" type="text/template">
+  <a data-toggle="tooltip" title= "<%= title %>" >
+      <ul>
+          <li><h2><%= title %></h2></li>
+          <li><%= author %></li>
+          <li><%= location %></li>
+          <li><%= type %></li>
+      </ul>
+  </a>
+  <button class = "btn btn-default delete">Delete</button>
+</script>
 <script id="hopTemplate" type="text/template">
-    <a data-toggle="tooltip" title= "<%= title %>" >
-        <ul>
-            <li><h2><%= title %></h2></li>
-            <li><%= author %></li>
-            <li><%= location %></li>
-            <li><%= type %></li>
-        </ul>
-    </a>
-    <button class = "btn btn-default delete">Delete</button>
+
+  <td><%= title %></td>
+  <td><%= author %></td>
+  <td><%= location %></td>
+  <td><%= type %></td>
+  <td><button class = "btn btn-default delete">Delete</button></td>
 </script>
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script src="/lib/bootstrap/bootstrap.min.js"></script>

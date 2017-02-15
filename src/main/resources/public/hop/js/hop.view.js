@@ -1,8 +1,8 @@
 var app = app || {};
 
 app.HopView = Backbone.View.extend({
-    tagName: 'div',
-    className: 'hopContainer',
+    tagName: 'tr',
+    //className: 'hopContainer',
     template: _.template( $('#hopTemplate').html() ),
 
     events: {
@@ -19,11 +19,10 @@ app.HopView = Backbone.View.extend({
 
     render: function() {
         // tmpl is a function that takes a JSON object and returns html
-
         // this.el is what we defined in tagName. use $el to get access
         // to jQuery html() function
+
         this.$el.html( this.template( this.model.toJSON() ));
-        this.$el.addClass('col-md-3');
 
         return this;
     }

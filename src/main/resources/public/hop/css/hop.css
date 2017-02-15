@@ -1,10 +1,13 @@
+.headerContainer{
 
-.container h1 span {
+}
+
+.headerContainer h1 span {
     float:middle;
     margin-right:14px;
 }
 
-.container h1 img {
+.headerContainer h1 img {
   vertical-align:middle;
   width: 1em;
   height: 1em;
@@ -32,7 +35,7 @@
 }
 
 /* add ellipsis when text is too large */
-.hopContainer h2, h3{
+.hopContainer h2, h3, li{
   color: white;
   white-space: nowrap;
   overflow: hidden;

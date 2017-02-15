@@ -5,7 +5,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/public/hop/css/hop.css" afterPath="$PROJECT_DIR$/src/main/resources/public/hop/css/hop.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/public/hop/index.html" afterPath="$PROJECT_DIR$/src/main/resources/public/hop/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/public/hop/js/hop.view.js" afterPath="$PROJECT_DIR$/src/main/resources/public/hop/js/hop.view.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/public/hop/js/library.view.js" afterPath="$PROJECT_DIR$/src/main/resources/public/hop/js/library.view.js" />
     </list>
     <ignored path="chinook.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hop.view.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hop.view.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/public/hop/js/hop.view.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state relative-caret-position="225">
+              <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -66,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="library.view.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="library.view.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/public/hop/js/library.view.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-123">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="177">
+              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -90,20 +90,20 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/public/hop/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-600">
-              <caret line="0" column="13" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="29" />
+              <caret line="27" column="13" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="29" />
               <folding>
-                <marker date="1487019533000" expanded="true" signature="517:1505" ph="..." />
-                <marker date="1487019533000" expanded="true" signature="545:1496" ph="..." />
-                <marker date="1487019533000" expanded="true" signature="579:996" ph="..." />
-                <marker date="1487019533000" expanded="true" signature="732:930" ph="..." />
-                <marker date="1487019533000" expanded="true" signature="1053:1460" ph="..." />
-                <marker date="1487019533000" expanded="true" signature="1101:1447" ph="..." />
-                <marker date="1487019533000" expanded="true" signature="1136:1226" ph="..." />
-                <marker date="1487019533000" expanded="true" signature="1261:1358" ph="..." />
-                <marker date="1487019533000" expanded="true" signature="1532:1733" ph="..." />
-                <marker date="1487019533000" expanded="true" signature="1560:1724" ph="..." />
-                <marker date="1487019533000" expanded="true" signature="1571:1662" ph="..." />
-                <marker date="1487019533000" expanded="true" signature="1792:2744" ph="..." />
+                <marker date="1487107778000" expanded="true" signature="517:1505" ph="..." />
+                <marker date="1487107778000" expanded="true" signature="545:1496" ph="..." />
+                <marker date="1487107778000" expanded="true" signature="579:996" ph="..." />
+                <marker date="1487107778000" expanded="true" signature="732:930" ph="..." />
+                <marker date="1487107778000" expanded="true" signature="1053:1460" ph="..." />
+                <marker date="1487107778000" expanded="true" signature="1101:1447" ph="..." />
+                <marker date="1487107778000" expanded="true" signature="1136:1226" ph="..." />
+                <marker date="1487107778000" expanded="true" signature="1261:1358" ph="..." />
+                <marker date="1487107778000" expanded="true" signature="1532:1749" ph="..." />
+                <marker date="1487107778000" expanded="true" signature="1576:1740" ph="..." />
+                <marker date="1487107778000" expanded="true" signature="1587:1678" ph="..." />
+                <marker date="1487107778000" expanded="true" signature="1808:3506" ph="..." />
               </folding>
             </state>
           </provider>
@@ -129,8 +129,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/resources/public/hop/index.html" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/main/resources/public/hop/js/library.view.js" />
         <option value="$PROJECT_DIR$/src/main/resources/public/hop/js/hop.view.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/public/hop/js/library.view.js" />
       </list>
     </option>
   </component>
@@ -265,10 +265,6 @@
               <option name="myItemId" value="public" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -331,40 +327,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chinook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chinook" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -694,7 +656,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46688208" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -773,20 +735,20 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/public/hop/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-600">
-          <caret line="0" column="13" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="29" />
+          <caret line="27" column="13" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="29" />
           <folding>
-            <marker date="1487019533000" expanded="true" signature="517:1505" ph="..." />
-            <marker date="1487019533000" expanded="true" signature="545:1496" ph="..." />
-            <marker date="1487019533000" expanded="true" signature="579:996" ph="..." />
-            <marker date="1487019533000" expanded="true" signature="732:930" ph="..." />
-            <marker date="1487019533000" expanded="true" signature="1053:1460" ph="..." />
-            <marker date="1487019533000" expanded="true" signature="1101:1447" ph="..." />
-            <marker date="1487019533000" expanded="true" signature="1136:1226" ph="..." />
-            <marker date="1487019533000" expanded="true" signature="1261:1358" ph="..." />
-            <marker date="1487019533000" expanded="true" signature="1532:1733" ph="..." />
-            <marker date="1487019533000" expanded="true" signature="1560:1724" ph="..." />
-            <marker date="1487019533000" expanded="true" signature="1571:1662" ph="..." />
-            <marker date="1487019533000" expanded="true" signature="1792:2744" ph="..." />
+            <marker date="1487107778000" expanded="true" signature="517:1505" ph="..." />
+            <marker date="1487107778000" expanded="true" signature="545:1496" ph="..." />
+            <marker date="1487107778000" expanded="true" signature="579:996" ph="..." />
+            <marker date="1487107778000" expanded="true" signature="732:930" ph="..." />
+            <marker date="1487107778000" expanded="true" signature="1053:1460" ph="..." />
+            <marker date="1487107778000" expanded="true" signature="1101:1447" ph="..." />
+            <marker date="1487107778000" expanded="true" signature="1136:1226" ph="..." />
+            <marker date="1487107778000" expanded="true" signature="1261:1358" ph="..." />
+            <marker date="1487107778000" expanded="true" signature="1532:1749" ph="..." />
+            <marker date="1487107778000" expanded="true" signature="1576:1740" ph="..." />
+            <marker date="1487107778000" expanded="true" signature="1587:1678" ph="..." />
+            <marker date="1487107778000" expanded="true" signature="1808:3506" ph="..." />
           </folding>
         </state>
       </provider>
@@ -795,14 +757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/public/hop/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -823,18 +777,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/public/hop/js/library.view.js">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/public/hop/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-123">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/public/hop/js/hop.view.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="225">
+          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/public/hop/js/library.view.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
           <folding />
         </state>
       </provider>

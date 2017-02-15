@@ -8,7 +8,7 @@
     <meta name="author" content="kj6682">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/jumbotron.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/hop.css">
+    <link href="css/hop.css" rel="stylesheet">
 </head>
 <body>
   <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -37,7 +37,7 @@
   </nav>
 
   <div class="jumbotron">
-    <div class="container">
+    <div class="container headerContainer">
       <h1>
         <img src="img/rocket.png" class="logo"/>
         <span>Chinook!</span>
@@ -67,17 +67,41 @@
               </div>
               <button id="add">Add</button>
         </form>
+        <div class="hopContainer col-md-3">
+        <a data-toggle="tooltip" title= " title " >
+            <ul>
+                <li><h2>title </h2></li>
+                <li>author author author del casso non andare via</li>
+                <li> location </li>
+                <li> type </li>
+            </ul>
+        </a>
+        <button class = "btn btn-default delete">Delete</button>
+      </div>
+      <div class="hopContainer col-md-3">
+      <a data-toggle="tooltip" title= " title " >
+          <ul>
+              <li><h2> title </h2></li>
+              <li> author </li>
+              <li> location </li>
+              <li> type </li>
+          </ul>
+      </a>
+      <button class = "btn btn-default delete">Delete</button>
+    </div>
         <!-- hops go here -->
       </div>
 
 <script id="hopTemplate" type="text/template">
+    <a data-toggle="tooltip" title= "<%= title %>" >
         <ul>
-            <li><a data-toggle="tooltip" title= "<%= title %>" ><h2><%= title %></h2></a></li>
+            <li><h2><%= title %></h2></li>
             <li><%= author %></li>
             <li><%= location %></li>
             <li><%= type %></li>
         </ul>
-        <button class = "btn btn-default delete">Delete</button>
+    </a>
+    <button class = "btn btn-default delete">Delete</button>
 </script>
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script src="/lib/bootstrap/bootstrap.min.js"></script>

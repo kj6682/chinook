@@ -26,12 +26,15 @@ app.LibraryView = Backbone.View.extend({
             if( $( el ).val() != '' ){
                 formData[ el.id ] = $( el ).val();
             }
+             // Clear input field value
+             $( el ).val('');
         });
 
         var hop = new app.Hop( formData )
         this.collection.add( hop );
         hop.save();
-        console.log ( formData );
+
+
     },
 
     // render library by rendering each book in its collection

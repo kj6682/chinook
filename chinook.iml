@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/security" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -79,10 +80,6 @@
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:1.12.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:4.3.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-security:1.4.0.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:4.1.1.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:4.1.1.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:4.1.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.postgresql:postgresql:9.4-1206-jdbc42" level="project" />
     <orderEntry type="library" name="Maven: io.springfox:springfox-swagger2:2.2.2" level="project" />
     <orderEntry type="library" name="Maven: org.mapstruct:mapstruct:1.0.0.CR1" level="project" />
@@ -99,5 +96,9 @@
     <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-common:2.2.2" level="project" />
     <orderEntry type="library" name="Maven: io.springfox:springfox-spring-web:2.2.2" level="project" />
     <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-ui:2.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-security:1.4.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:4.1.1.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:4.1.1.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:4.1.1.RELEASE" level="project" />
   </component>
 </module>

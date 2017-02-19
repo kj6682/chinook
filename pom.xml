@@ -24,35 +24,72 @@
     </properties>
     <profiles>
         <profile>
-            <id>security</id>
+            <id>secure-create</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <spring.profiles.active>security</spring.profiles.active>
+                <spring.profiles.active>create</spring.profiles.active>
             </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-security</artifactId>
+                </dependency>
+            </dependencies>
         </profile>
-
+        <profile>
+            <id>secure-validate</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>validate</spring.profiles.active>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-security</artifactId>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>org/kj6682/hop/SampleDataCLR.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>unsecure</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <spring.profiles.active>nosec</spring.profiles.active>
+                    <spring.profiles.active>unsecure</spring.profiles.active>
             </properties>
             <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/java</directory>
-                        <filtering>true</filtering>
-                        <excludes>
-                            <exclude>org/kj6682/security/*.java</exclude>
-                        </excludes>
-                    </resource>
-                </resources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>org/kj6682/hop/Account.java</exclude>
+                                <exclude>org/kj6682/hop/AccountRepository.java</exclude>
+                                <exclude>org/kj6682/hop/AccountUserDetailsService.java</exclude>
+                                <exclude>org/kj6682/hop/SampleDataCLR.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
             </build>
-
         </profile>
     </profiles>
 
@@ -69,10 +106,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
 
@@ -98,6 +131,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <profiles>
+                        <profile>${spring.profiles.active}</profile>
+                    </profiles>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

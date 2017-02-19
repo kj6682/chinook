@@ -1,4 +1,4 @@
-package org.kj6682.security;
+package org.kj6682.hop;
 
 import org.springframework.data.repository.CrudRepository;
 

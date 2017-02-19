@@ -1,16 +1,31 @@
 # hop
 
 
-**hop** is a service for media stuff  
-forget I enumerate the API here, just follow **http://localhost:8080/swagger-ui.html#!/hop-rest-controller/** to have a serius Swagger experience
+**hop** is a service for media stuff with a flavour of BackboneJS
+  
+run the application and just follow **http://localhost:8080/swagger-ui.html#!/hop-rest-controller/** to have a serius Swagger experience
 
 
 ##use
 **mvn spring-boot:run**
    to run the bootiful app
-   
+
+**mvn spring-boot:run -Psecure-validate**
+      to run the bootiful app with security without data refresh (users are not created, hops are not cleaned up)
+      the maven profile 'secure-validate' triggers the spring profile 'validate'
+      this is the default profile
+
+**mvn spring-boot:run -Psecure-create**
+      to run the bootiful app with security and data refresh (users created, hops are cleaned up)
+      the maven profile 'secure-validate' triggers the spring profile 'validate'
+      
+**mvn spring-boot:run -Punsecure**
+      to run the bootiful app without security
+      the maven profile 'unsecure' triggers the spring profile 'unsecure'
+
 **mvn spring-boot:run -Dspring.active.profiles=integration**
    to run the bootiful app with some integration tests
+
 
 
 ---  

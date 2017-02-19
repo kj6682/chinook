@@ -7,9 +7,18 @@ spring:
     password: hr
     platform: POSTGRESQL
   jpa:
-    hibernate:
-      ddl-auto: validate
     show-sql: true
 server:
     port: 8082
-
+---
+spring:
+  profiles: create
+  jpa:
+    hibernate:
+      ddl-auto: create
+---
+spring:
+  profiles: default
+  jpa:
+    hibernate:
+      ddl-auto: validate

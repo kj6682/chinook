@@ -11,6 +11,7 @@
     <link href="css/hop.css" rel="stylesheet">
 </head>
 <body>
+
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
@@ -61,7 +62,7 @@
       <p>This is a simple client for hopsters.</p>
     </div>
   </div>
-  <div w3-include-html="todo.html"></div>
+
   <div class="container">
       <div  id="hops" class="row">
         <form id="addHop" action="#" class="form-inline">
@@ -102,7 +103,9 @@
       </div>
   </div>
 
-<script id="hopTemplate" type="text/template">
+  <div w3-include-html="todo.html"></div>
+
+  <script id="hopTemplate" type="text/template">
 
   <td><%= title %></td>
   <td><%= author %></td>
@@ -115,7 +118,7 @@
 <script src="/lib/underscore/underscore.js"></script>
 <script src="/lib/backbone/backbone.js"></script>
 <script src="/lib/requirejs/require.js"></script>
-<script src="https://www.w3schools.com/lib/w3data.js"></script>
+<script src="/lib/w3/w3data.js"></script>
 <script>
 w3IncludeHTML();
 </script>

@@ -24,7 +24,7 @@
     </properties>
     <profiles>
         <profile>
-            <id>secure-create</id>
+            <id>create</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -39,7 +39,7 @@
             </dependencies>
         </profile>
         <profile>
-            <id>secure-validate</id>
+            <id>validate</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -67,12 +67,12 @@
             </build>
         </profile>
         <profile>
-            <id>unsecure</id>
+            <id>no-security</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                    <spring.profiles.active>unsecure</spring.profiles.active>
+                    <spring.profiles.active>no-security</spring.profiles.active>
             </properties>
             <build>
                 <plugins>

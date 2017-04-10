@@ -1,7 +1,7 @@
-# hop
+# CHINOOK
 
 
-**hop** is a service for media stuff with a flavour of BackboneJS
+**chinook** is a service for media stuff (hops - Hypermedia Object Personally Selected) with a flavour of BackboneJS
   
 run the application and just follow **http://localhost:8080/swagger-ui.html#!/hop-rest-controller/** to have a serius Swagger experience
 
@@ -63,6 +63,12 @@ In case a different base should be needed, we will provide a specific version of
 ###HopsterApplication
 This is the main bootiful Application.
 It embeds its configuration in order to keep things clean and simple.
+
+#Notes
+In order to avoid annoying .idea files in my commits (and despite a quite good .gitignore) I had to proceed to this:
+```
+git rm -r --cached .idea
+```
 
 ---
 That's all folks, this describes all the microservice by now.

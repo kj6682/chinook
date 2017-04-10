@@ -90,7 +90,7 @@ public class HopRestControllerTest {
         HopRestController controller = new HopRestController(hopService);
 
         controller.update(1L, "title", "author", "book", "nowhere");
-        verify(hopService, atMost(1)).delete(anyLong());
+        verify(hopService, atMost(1)).deleteOne(anyLong());
         verify(hopService, atMost(1)).insertOne(anyString(), anyString(), anyString(), anyString());
         logger.info("update_OK");
 
@@ -101,7 +101,7 @@ public class HopRestControllerTest {
         HopRestController controller = new HopRestController(hopService);
 
         controller.delete(1L);
-        verify(hopService, only()).delete(anyLong());
+        verify(hopService, only()).deleteOne(anyLong());
         logger.info("delete_OK");
 
     }

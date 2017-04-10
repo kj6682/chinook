@@ -1,6 +1,5 @@
 package org.kj6682.hop;
 
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,13 +55,13 @@ class HopRestController {
                        @RequestParam(value = "type", defaultValue = "BOOK") String type,
                        @RequestParam(value = "location", defaultValue = "nowhere") String location) {
 
-        hopService.delete(id);
+        hopService.deleteOne(id);
         hopService.insertOne(title, author, type, location);
     }
 
     @DeleteMapping(value = "/hop/{id}")
     void delete(@PathVariable Long id) {
-        hopService.delete(id);
+        hopService.deleteOne(id);
     }
 
 }

@@ -18,5 +18,5 @@ interface HopRepository extends CrudRepository<Hop, Long> {
     List<Hop> findAll();
 
     @Query("select u from Hop u where (u.title like %?1%) or (u.author like %?1%)")
-    List<Hop> searchFor(String search4me);
+    List<Hop> searchByAuthorOrTitle(String search4me);
 }

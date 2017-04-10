@@ -40,7 +40,7 @@ class HopService {
             return hopRepository.findAll();
         }
 
-        return hopRepository.searchFor(search4me);
+        return hopRepository.searchByAuthorOrTitle(search4me);
     }
 
     void insertOne(String title, String author, String type, String location) {
@@ -48,7 +48,7 @@ class HopService {
         hopRepository.save(hop);
     }
 
-    void delete(Long id) {
+    void deleteOne(Long id) {
         hopRepository.delete(id);
     }
 }//:)

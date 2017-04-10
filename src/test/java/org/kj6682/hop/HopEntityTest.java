@@ -11,6 +11,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Created by luigi on 10/04/2017.
+ *
+ * This class tests the entity HOP
+ * It looks pretty useless but it is a good exercise.
+ * It would have been better to define this class in a classic TDD approach to define the
+ * error messages to be thrown on construction
+ *
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest

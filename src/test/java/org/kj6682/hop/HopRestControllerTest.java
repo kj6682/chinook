@@ -41,7 +41,7 @@ public class HopRestControllerTest {
     @Test
     public void findById_OK() {
 
-        when(hopService.findById(anyLong())).thenReturn(getHop());
+        when(hopService.findById(anyLong())).thenReturn( new Hop("title", "author", "type", "location" ) );
         HopRestController controller = new HopRestController(hopService);
 
         assertNotNull(controller.findById(1L));
@@ -90,7 +90,8 @@ public class HopRestControllerTest {
         HopRestController controller = new HopRestController(hopService);
 
         controller.update(1L, "title", "author", "book", "nowhere");
-        verify(hopService, only()).replaceOne(anyLong(), anyString(), anyString(), anyString(), anyString());
+        verify(hopService, atMost(1)).delete(anyLong());
+        verify(hopService, atMost(1)).insertOne(anyString(), anyString(), anyString(), anyString());
         logger.info("update_OK");
 
     }
@@ -108,17 +109,9 @@ public class HopRestControllerTest {
     private List<Hop>  listHops(){
         List<Hop> hops = new LinkedList<>();
         for(int i = 0; i <10; i++){
-            hops.add(getHop());
+            hops.add( new Hop("title", "author", "type", "location" ) );
         }
         return hops;
-    }
-    private Hop getHop() {
-        Hop hop = new Hop();
-        hop.setTitle("title");
-        hop.setAuthor("author");
-        hop.setType("type");
-        hop.setLocation("location");
-        return hop;
     }
 
 

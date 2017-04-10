@@ -8,10 +8,9 @@ import javax.persistence.*;
  *
  * This model object guarantees the minimal required information per document on the server side.
  *
- * MongoDB stores data in collections.
- * Spring Data MongoDB will map the class Hop into a collection called hop.
+ * Postgres stores data in collections.
+ * Spring Data Postgres will map the class Hop into a collection called hop.
  * If you want to change the name of the collection, you can use
- * Spring Data MongoDB’s @Document annotation on the class.
  */
 
 @Entity
@@ -34,28 +33,18 @@ class Hop {
 
     private  String location;
 
-    public void setId(Long id) {
-        //Assert.hasLength(id, "id must not be empty");
-        this.id = id;
-    }
+    protected Hop(){}
 
-    public void setTitle(String title) {
+    public Hop(String title, String author, String type, String location) {
+
         Assert.hasLength(title, "A reasonable title is necessary when creating a Hop");
-        this.title = title;
-    }
-
-    public void setAuthor(String author) {
         Assert.hasLength(author, "A Hop needs an author");
-        this.author = author;
-    }
-
-    public void setType(String type) {
         Assert.hasLength(type, "A strict type is necessary when creating a Hop");
-        this.type = type;
-    }
-
-    public void setLocation(String location) {
         Assert.hasLength(location, "A Hop is needless without a location");
+
+        this.title = title;
+        this.author = author;
+        this.type = type;
         this.location = location;
     }
 

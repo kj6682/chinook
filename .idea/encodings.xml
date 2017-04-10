@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="Encoding">
-    <file url="file://$USER_HOME$/SPRING_SECURITY_HOME/spring-security-4.2.1.RELEASE/samples/boot/helloworld/pom.xml" charset="ISO-8859-1" />
-    <file url="file://$USER_HOME$/SPRING_SECURITY_HOME/spring-security-4.2.1.RELEASE/samples/boot/insecure/pom.xml" charset="ISO-8859-1" />
-    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-  </component>
-</project>

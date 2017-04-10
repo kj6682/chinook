@@ -44,7 +44,7 @@ class HopRestController {
 
     @PostMapping(value = "/hop")
     void create(@RequestBody Hop hop) {
-        System.out.println("bloody post" + hop);
+
         hopService.insertOne(hop.getTitle(), hop.getAuthor(), hop.getType(), hop.getLocation());
 
     }
@@ -56,7 +56,8 @@ class HopRestController {
                        @RequestParam(value = "type", defaultValue = "BOOK") String type,
                        @RequestParam(value = "location", defaultValue = "nowhere") String location) {
 
-        hopService.replaceOne(id, title, author, type, location);
+        hopService.delete(id);
+        hopService.insertOne(title, author, type, location);
     }
 
     @DeleteMapping(value = "/hop/{id}")

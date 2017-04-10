@@ -44,20 +44,7 @@ class HopService {
     }
 
     void insertOne(String title, String author, String type, String location) {
-        Hop hop = new Hop();
-        hop.setTitle(title);
-        hop.setAuthor(author);
-        hop.setType(type);
-        hop.setLocation(location);
-        hopRepository.save(hop);
-    }
-
-    void replaceOne(Long id, String title, String author, String type, String location) {
-        Hop hop = hopRepository.findOne(id);
-        hop.setTitle(title);
-        hop.setAuthor(author);
-        hop.setType(type);
-        hop.setLocation(location);
+        Hop hop = new Hop(title, author, type, location);
         hopRepository.save(hop);
     }
 

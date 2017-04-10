@@ -16,7 +16,7 @@ class Account {
     private String username, password;
     private boolean active;
 
-    public Account() {// why JPA why?
+    protected Account() {// why JPA why?
     }
 
     public Account(String username, String password, boolean active) {

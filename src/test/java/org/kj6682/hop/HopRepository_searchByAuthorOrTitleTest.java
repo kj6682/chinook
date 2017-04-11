@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class HopRepositorySearchByAuthorOrTitleTest {
+public class HopRepository_searchByAuthorOrTitleTest {
 
     public static final int MAX_ITEMS = 3;
 

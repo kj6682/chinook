@@ -65,49 +65,10 @@ public class HopRepository_findAllTest {
     }
 
     @Test
-    public void should_return_one_page() throws Exception {
+    public void should_return_page_one() throws Exception {
 
-        Pageable pageable = new Pageable() {
-            @Override
-            public int getPageNumber() {
-                return 0;
-            }
+        TestPageable pageable = new TestPageable(0, PAGE_SIZE);
 
-            @Override
-            public int getPageSize() {
-                return PAGE_SIZE;
-            }
-
-            @Override
-            public int getOffset() {
-                return 0;
-            }
-
-            @Override
-            public Sort getSort() {
-                return null;
-            }
-
-            @Override
-            public Pageable next() {
-                return null;
-            }
-
-            @Override
-            public Pageable previousOrFirst() {
-                return null;
-            }
-
-            @Override
-            public Pageable first() {
-                return null;
-            }
-
-            @Override
-            public boolean hasPrevious() {
-                return false;
-            }
-        };
 
         Page<Hop> page = this.repository.findAll(pageable);
         assertThat(page).isNotNull();
@@ -124,4 +85,127 @@ public class HopRepository_findAllTest {
         assertThat(list).isEmpty();
 
     }
+
+    @Test
+    public void should_return_page_two() throws Exception {
+
+        TestPageable pageable = new TestPageable(1, PAGE_SIZE);
+
+        Page<Hop> page = this.repository.findAll(pageable);
+        assertThat(page).isNotNull();
+        assertThat(page.getSize()).isEqualTo(PAGE_SIZE);
+        assertThat(page.getTotalElements()).isEqualTo(MAX_ITEMS);
+        assertThat(page.getTotalPages()).isEqualTo(MAX_ITEMS / PAGE_SIZE);
+
+        List<Integer> list = page.getContent().stream()
+                .map(w -> w.getTitle().split("\\s+")) // "author X" -> ["author", "X"]
+                .map(i -> Integer.valueOf(i[1]))      // "X" -> X
+                .filter(z -> (z < 10) || (z > 20))     // remove all items out of range
+                .collect(Collectors.toList());        // use this to verify the list if empty
+        assertThat(list).isNotNull();
+        assertThat(list).isEmpty();
+        list.forEach(System.out::println);
+    }
+
+    @Test
+    public void should_return_page_three() throws Exception {
+
+        TestPageable pageable = new TestPageable(2, PAGE_SIZE);
+
+
+        Page<Hop> page = this.repository.findAll(pageable);
+        assertThat(page).isNotNull();
+        assertThat(page.getSize()).isEqualTo(PAGE_SIZE);
+        assertThat(page.getTotalElements()).isEqualTo(MAX_ITEMS);
+        assertThat(page.getTotalPages()).isEqualTo(MAX_ITEMS / PAGE_SIZE);
+
+        List<Integer> list = page.getContent().stream()
+                .map(w -> w.getTitle().split("\\s+")) // "author X" -> ["author", "X"]
+                .map(i -> Integer.valueOf(i[1]))      // "X" -> X
+                .filter(z -> (z < 20) || (z > 30))     // remove all items out of range
+                .collect(Collectors.toList());        // use this to verify the list if empty
+        assertThat(list).isNotNull();
+        assertThat(list).isEmpty();
+        list.forEach(System.out::println);
+
+    }
+
+    @Test
+    public void should_return_page_four() throws Exception {
+
+        TestPageable pageable = new TestPageable(3, PAGE_SIZE);
+
+        Page<Hop> page = this.repository.findAll(pageable);
+        assertThat(page).isNotNull();
+        assertThat(page.getSize()).isEqualTo(PAGE_SIZE);
+        assertThat(page.getTotalElements()).isEqualTo(MAX_ITEMS);
+        assertThat(page.getTotalPages()).isEqualTo(MAX_ITEMS / PAGE_SIZE);
+
+        assertThat(page).isEmpty();
+
+    }
+
+    @Test
+    public void should_return_page_five_of_seven_elements() throws Exception {
+
+        TestPageable pageable = new TestPageable(4, 7);
+
+        Page<Hop> page = this.repository.findAll(pageable);
+        assertThat(page).isNotNull();
+        assertThat(page.getSize()).isEqualTo(7);
+        assertThat(page.getTotalElements()).isEqualTo(MAX_ITEMS);
+
+
+    }
+
+    private class TestPageable implements Pageable{
+        private final int pageNumber;
+        private final int pageSize;
+
+        private TestPageable(int pageNumber, int pageSize){
+            this.pageNumber = pageNumber;
+            this.pageSize = pageSize;
+        }
+
+        @Override
+        public int getPageNumber() {
+            return this.pageNumber;
+        }
+
+        @Override
+        public int getPageSize() {
+            return this.pageSize;
+        }
+
+        @Override
+        public int getOffset() {
+            return getPageNumber() * getPageSize();
+        }
+
+        @Override
+        public Sort getSort() {
+            return null;
+        }
+
+        @Override
+        public Pageable next() {
+            return null;
+        }
+
+        @Override
+        public Pageable previousOrFirst() {
+            return null;
+        }
+
+        @Override
+        public Pageable first() {
+            return null;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return false;
+        }
+    }
 }
+//:)

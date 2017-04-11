@@ -1,10 +1,13 @@
 package org.kj6682.hop;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.query.Param;
 
 /**
  * This is the JPA repository for managing Hops.
@@ -17,6 +20,8 @@ interface HopRepository extends CrudRepository<Hop, Long> {
 
     List<Hop> findAll();
 
-    @Query("select u from Hop u where (u.title like %?1%) or (u.author like %?1%)")
-    List<Hop> searchByAuthorOrTitle(String search4me);
+    @Query("select u from Hop u where (lower(u.title) like %:search4me%) or (lower(u.author) like %:search4me%)")
+    List<Hop> searchByAuthorOrTitle(@Param("search4me") String search4me);
+
+
 }

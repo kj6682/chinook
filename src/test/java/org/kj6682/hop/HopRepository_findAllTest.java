@@ -71,18 +71,13 @@ public class HopRepository_findAllTest {
 
 
         Page<Hop> page = this.repository.findAll(pageable);
+
         assertThat(page).isNotNull();
         assertThat(page.getSize()).isEqualTo(PAGE_SIZE);
         assertThat(page.getTotalElements()).isEqualTo(MAX_ITEMS);
         assertThat(page.getTotalPages()).isEqualTo(MAX_ITEMS / PAGE_SIZE);
 
-        List<Integer> list = page.getContent().stream()
-                .map(w -> w.getTitle().split("\\s+")) // "author X" -> ["author", "X"]
-                .map(i -> Integer.valueOf(i[1]))      // "X" -> X
-                .filter(z -> (z < 0) || (z > 10))     // remove all items out of range
-                .collect(Collectors.toList());        // use this to verify the list if empty
-        assertThat(list).isNotNull();
-        assertThat(list).isEmpty();
+        verifyRange(page, 0, 10);
 
     }
 
@@ -97,14 +92,7 @@ public class HopRepository_findAllTest {
         assertThat(page.getTotalElements()).isEqualTo(MAX_ITEMS);
         assertThat(page.getTotalPages()).isEqualTo(MAX_ITEMS / PAGE_SIZE);
 
-        List<Integer> list = page.getContent().stream()
-                .map(w -> w.getTitle().split("\\s+")) // "author X" -> ["author", "X"]
-                .map(i -> Integer.valueOf(i[1]))      // "X" -> X
-                .filter(z -> (z < 10) || (z > 20))     // remove all items out of range
-                .collect(Collectors.toList());        // use this to verify the list if empty
-        assertThat(list).isNotNull();
-        assertThat(list).isEmpty();
-        list.forEach(System.out::println);
+        verifyRange(page, 10, 20);
     }
 
     @Test
@@ -119,14 +107,7 @@ public class HopRepository_findAllTest {
         assertThat(page.getTotalElements()).isEqualTo(MAX_ITEMS);
         assertThat(page.getTotalPages()).isEqualTo(MAX_ITEMS / PAGE_SIZE);
 
-        List<Integer> list = page.getContent().stream()
-                .map(w -> w.getTitle().split("\\s+")) // "author X" -> ["author", "X"]
-                .map(i -> Integer.valueOf(i[1]))      // "X" -> X
-                .filter(z -> (z < 20) || (z > 30))     // remove all items out of range
-                .collect(Collectors.toList());        // use this to verify the list if empty
-        assertThat(list).isNotNull();
-        assertThat(list).isEmpty();
-        list.forEach(System.out::println);
+        verifyRange(page, 20, 30);
 
     }
 
@@ -151,6 +132,7 @@ public class HopRepository_findAllTest {
         TestPageable pageable = new TestPageable(4, 7);
 
         Page<Hop> page = this.repository.findAll(pageable);
+
         assertThat(page).isNotNull();
         assertThat(page.getSize()).isEqualTo(7);
         assertThat(page.getTotalElements()).isEqualTo(MAX_ITEMS);
@@ -206,6 +188,17 @@ public class HopRepository_findAllTest {
         public boolean hasPrevious() {
             return false;
         }
+    }
+
+    private void verifyRange(Page<Hop> page, int min, int max) {
+        List<Integer> list = page.getContent().stream()
+                .map(w -> w.getTitle().split("\\s+")) // "author X" -> ["author", "X"]
+                .map(i -> Integer.valueOf(i[1]))      // "X" -> X
+                .filter(z -> (z < min) || (z > max))     // remove all items out of range
+                .collect(Collectors.toList());
+
+        assertThat(list).isNotNull();
+        assertThat(list).isEmpty();
     }
 }
 //:)

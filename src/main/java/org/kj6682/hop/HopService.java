@@ -54,7 +54,10 @@ class HopService {
     }
 
     void insertOne(String title, String author, String type, String location) {
+
         Hop hop = new Hop(title, author, type, location);
+        Assert.notNull(hop);
+
         hopRepository.save(hop);
     }
 

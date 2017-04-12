@@ -1,29 +1,37 @@
 package org.kj6682.hop;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.kj6682.hop.Hop.*;
 import static org.kj6682.hop.Hop.UNKNOWN_LOCATION;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by luigi on 12/04/2017.
- *
+ * <p>
  * This class is important because it defines the contract of HopService.
  * That is the way we want to use the methods of the HopService.
- *
+ * <p>
  * If we define this class before the implementation of the HopService, we are granted to have a better desing ;)
  */
 public class HopServiceTest {
+
+    List<Hop> fullList;
+    List<Hop> partialList;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -33,15 +41,27 @@ public class HopServiceTest {
 
     private HopService service;
 
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         this.service = new HopService();
         this.service.setHopRepository(this.hopRepository);
+
+        fullList = new LinkedList<Hop>();
+        partialList = new LinkedList<Hop>();
+
+        for (int i = 0; i < 10; i++) {
+            Hop h = new Hop("title " + i, "author " + i, "book", "nowhere");
+            fullList.add(h);
+            if (i % 2 == 0) {
+                partialList.add(h);
+            }
+        }
     }
 
     @Test
-    public void findOne_when_id_is_null_should_throw_IllegalArgumentException() throws Exception{
+    public void findOne_when_id_is_null_should_throw_IllegalArgumentException() throws Exception {
 
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage("A reasonable id is necessary when searching for one specific Hop");
@@ -51,7 +71,7 @@ public class HopServiceTest {
 
 
     @Test
-    public void findOne_when_id_is_not_matching_should_return_dummy_Hop() throws Exception{
+    public void findOne_when_id_does_not_match_should_return_dummy_Hop() throws Exception {
         Optional<Hop> optional = Optional.ofNullable(null);
         given(this.hopRepository.findById(anyLong())).willReturn(optional);
 
@@ -64,8 +84,8 @@ public class HopServiceTest {
     }
 
     @Test
-    public void findOne_when_id_does_match_should_return_valid_Hop() throws Exception{
-        Optional<Hop> optional = Optional.of(new  Hop("title", "author", "type", "location"));
+    public void findOne_when_id_does_match_should_return_valid_Hop() throws Exception {
+        Optional<Hop> optional = Optional.of(new Hop("title", "author", "type", "location"));
 
         given(this.hopRepository.findById(anyLong())).willReturn(optional);
 
@@ -77,5 +97,42 @@ public class HopServiceTest {
         assertThat(hop.getLocation()).isEqualTo("location");
     }
 
+    @Test
+    public void find_with_empty_argument_should_return_the_whole_list_of_Hops() {
+
+        given(this.hopRepository.findAll()).willReturn(fullList);
+        given(this.hopRepository.searchByAuthorOrTitle(any())).willReturn(partialList);
+
+        List<Hop> list = this.service.find(null);
+
+        verify(this.hopRepository, atMost(1)).findAll();
+        verify(this.hopRepository, never()).searchByAuthorOrTitle(any());
+        assertThat(list).isNotEmpty();
+        assertThat(list.size()).isEqualTo(fullList.size());
+        assertThat(list.size()).isNotEqualTo(partialList.size());
+    }
+
+    @Test
+    public void find_with_valid_argument_should_return_a_list_of_Hops() {
+        given(this.hopRepository.findAll()).willReturn(fullList);
+        given(this.hopRepository.searchByAuthorOrTitle(any())).willReturn(partialList);
+
+        List<Hop> list = this.service.find("search4me");
+
+        verify(this.hopRepository, never()).findAll();
+        verify(this.hopRepository, atMost(1)).searchByAuthorOrTitle(any());
+        assertThat(list).isNotEmpty();
+        assertThat(list.size()).isEqualTo(partialList.size());
+        assertThat(list.size()).isNotEqualTo(fullList.size());
+    }
+
+    @Test
+    public void insert_with_invalid_arguments_should_throw_exception() {
+        this.thrown.expect(IllegalArgumentException.class);
+        this.thrown.expectMessage("A reasonable title is necessary when creating a Hop");
+
+        this.service.insertOne(null, null, null, null);
+
+    }
 
 }

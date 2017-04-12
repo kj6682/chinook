@@ -71,7 +71,9 @@ public class HopRepository_findOne {
 
         Optional<Hop> hop = this.repository.findById(id);
 
+        assertThat(hop.isPresent()).isEqualTo(true);
         assertThat(hop.get()).isNotNull();
+        assertThat(hop.get().getId()).isEqualTo(id);
 
     }
 

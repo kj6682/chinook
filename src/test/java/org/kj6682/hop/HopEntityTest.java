@@ -36,7 +36,7 @@ public class HopEntityTest {
 
 
     @Test
-    public void create_when_title_is_null_should_throw_exception() throws Exception {
+    public void create___when_title_is_null_should_throw_exception() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage(ON_TITLE);
         new Hop(null, "author", "type", "location");
@@ -44,7 +44,7 @@ public class HopEntityTest {
     }
 
     @Test
-    public void create_when_title_is_empty_should_throw_exception() throws Exception {
+    public void create___when_title_is_empty_should_throw_exception() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage(ON_TITLE);
         new Hop("", "author", "type", "location");
@@ -52,42 +52,42 @@ public class HopEntityTest {
     }
 
     @Test
-    public void create_when_author_is_null_should_throw_exception() throws Exception {
+    public void create___when_author_is_null_should_throw_exception() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage(ON_AUTHOR);
         new Hop("title", null, "type", "location");
     }
 
     @Test
-    public void create_when_author_is_empty_should_throw_exception() throws Exception {
+    public void create___when_author_is_empty_should_throw_exception() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage(ON_AUTHOR);
         new Hop("title", "", "type", "location");
     }
 
     @Test
-    public void create_when_type_is_null_should_throw_exception() throws Exception {
+    public void create___when_type_is_null_should_throw_exception() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage("A" + ON_TYPE);
         new Hop("title", "author", null, "location");
     }
 
     @Test
-    public void create_when_type_is_empty_should_throw_exception() throws Exception {
+    public void create___when_type_is_empty_should_throw_exception() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage("A" + ON_TYPE);
         new Hop("title", "author", "", "location");
     }
 
     @Test
-    public void create_when_location_is_null_should_throw_exception() throws Exception {
+    public void create___when_location_is_null_should_throw_exception() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage(ON_LOCATION);
         new Hop("title", "author", "type", null);
     }
 
     @Test
-    public void create_when_location_is_empty_should_throw_exception() throws Exception {
+    public void create___when_location_is_empty_should_throw_exception() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage(ON_LOCATION);
         new Hop("title", "author", "type", "");

@@ -61,7 +61,7 @@ public class HopServiceTest {
     }
 
     @Test
-    public void findOne_when_id_is_null_should_throw_IllegalArgumentException() throws Exception {
+    public void findOne___when_id_is_null_should_throw_IllegalArgumentException() throws Exception {
 
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage("A reasonable id is necessary when searching for one specific Hop");
@@ -69,9 +69,18 @@ public class HopServiceTest {
         this.service.findOne(null);
     }
 
+    @Test
+    public void deleteOne___when_id_is_null_should_throw_IllegalArgumentException() throws Exception {
+
+        this.thrown.expect(IllegalArgumentException.class);
+        this.thrown.expectMessage("A reasonable id is necessary when searching for one specific Hop");
+
+        this.service.deleteOne(null);
+    }
+
 
     @Test
-    public void findOne_when_id_does_not_match_should_return_dummy_Hop() throws Exception {
+    public void findOne___when_id_does_not_match_should_return_dummy_Hop() throws Exception {
         Optional<Hop> optional = Optional.ofNullable(null);
         given(this.hopRepository.findById(anyLong())).willReturn(optional);
 
@@ -84,12 +93,15 @@ public class HopServiceTest {
     }
 
     @Test
-    public void findOne_when_id_does_match_should_return_valid_Hop() throws Exception {
+    public void findOne___when_id_does_match_should_return_valid_Hop() throws Exception {
         Optional<Hop> optional = Optional.of(new Hop("title", "author", "type", "location"));
 
         given(this.hopRepository.findById(anyLong())).willReturn(optional);
 
         Hop hop = this.service.findOne(1L);
+
+        verify(this.hopRepository, atMost(1)).findById(anyLong());
+        verifyNoMoreInteractions(this.hopRepository);
 
         assertThat(hop.getTitle()).isEqualTo("title");
         assertThat(hop.getAuthor()).isEqualTo("author");
@@ -98,7 +110,7 @@ public class HopServiceTest {
     }
 
     @Test
-    public void find_with_empty_argument_should_return_the_whole_list_of_Hops() {
+    public void find___with_empty_argument_should_return_the_whole_list_of_Hops() {
 
         given(this.hopRepository.findAll()).willReturn(fullList);
         given(this.hopRepository.searchByAuthorOrTitle(any())).willReturn(partialList);
@@ -107,13 +119,15 @@ public class HopServiceTest {
 
         verify(this.hopRepository, atMost(1)).findAll();
         verify(this.hopRepository, never()).searchByAuthorOrTitle(any());
+        verifyNoMoreInteractions(this.hopRepository);
+
         assertThat(list).isNotEmpty();
         assertThat(list.size()).isEqualTo(fullList.size());
         assertThat(list.size()).isNotEqualTo(partialList.size());
     }
 
     @Test
-    public void find_with_valid_argument_should_return_a_list_of_Hops() {
+    public void find___with_valid_argument_should_return_a_list_of_Hops() {
         given(this.hopRepository.findAll()).willReturn(fullList);
         given(this.hopRepository.searchByAuthorOrTitle(any())).willReturn(partialList);
 
@@ -121,18 +135,53 @@ public class HopServiceTest {
 
         verify(this.hopRepository, never()).findAll();
         verify(this.hopRepository, atMost(1)).searchByAuthorOrTitle(any());
+        verifyNoMoreInteractions(this.hopRepository);
+
         assertThat(list).isNotEmpty();
         assertThat(list.size()).isEqualTo(partialList.size());
         assertThat(list.size()).isNotEqualTo(fullList.size());
     }
 
     @Test
-    public void insert_with_invalid_arguments_should_throw_exception() {
+    public void insert___with_invalid_arguments_should_throw_exception() {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage("A reasonable title is necessary when creating a Hop");
 
         this.service.insertOne(null, null, null, null);
 
+        verifyNoMoreInteractions(this.hopRepository);
+
     }
 
+    @Test
+    public void insert___should_return_silently() {
+        given(this.hopRepository.save(any())).willAnswer(RETURNS_MOCKS);
+
+        this.service.insertOne("title", "author", "type", "location");
+
+        verify(this.hopRepository, atMost(1)).save(any());
+        verifyNoMoreInteractions(this.hopRepository);
+
+    }
+
+    @Test
+    public void delete___should_return_silently() {
+        doNothing().when(this.hopRepository).delete(anyLong());
+
+        this.service.deleteOne(anyLong());
+
+        verify(this.hopRepository, atMost(1)).delete(any());
+        verifyNoMoreInteractions(this.hopRepository);
+
+    }
+
+    @Test
+    public void findAll___should_return_the_whole_list_of_Hops(){
+        given(this.hopRepository.findAll()).willReturn(fullList);
+
+        this.service.findAll();
+
+        verify(this.hopRepository, atMost(1)).findAll();
+        verifyNoMoreInteractions(this.hopRepository);
+    }
 }

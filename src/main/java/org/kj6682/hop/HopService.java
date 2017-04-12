@@ -62,6 +62,7 @@ class HopService {
     }
 
     void deleteOne(Long id) {
+        Assert.notNull(id, "A reasonable id is necessary when searching for one specific Hop");
         hopRepository.delete(id);
     }
 }//:)

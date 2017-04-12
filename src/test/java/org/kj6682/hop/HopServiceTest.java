@@ -28,17 +28,21 @@ public class HopServiceTest {
     }
 
     @Test
-    public void findById_when_id_is_null_should_throw_IllegalArgumentException() throws Exception{
+    public void findOne_when_id_is_null_should_throw_IllegalArgumentException() throws Exception{
+
+        this.thrown.expect(IllegalArgumentException.class);
+        this.thrown.expectMessage("A reasonable id is necessary when searching for one specific Hop");
+
+        this.service.findOne(null);
+    }
+
+    @Test
+    public void findOne_when_id_is_empty_should_throw_IllegalArgumentException() throws Exception{
 
     }
 
     @Test
-    public void findById_when_id_is_empty_should_throw_IllegalArgumentException() throws Exception{
-
-    }
-
-    @Test
-    public void findById_when_id_is_not_matching_should_return_Optional() throws Exception{
+    public void findOne_when_id_is_not_matching_should_return_Optional() throws Exception{
 
     }
 

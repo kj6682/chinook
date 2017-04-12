@@ -20,6 +20,11 @@ class Hop {
         AUDIO, BOOK, MOVIE;
     }
 
+    public static final String UNKNOWN_AUTHOR   = "unknown author";
+    public static final String UNKNOWN_TITLE    = "unknown title";
+    public static final String UNKNOWN_LOCATION = "unknown location";
+    public static final String UNKNOWN_TYPE     = "unknown type";
+
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

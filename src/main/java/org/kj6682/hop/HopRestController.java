@@ -28,8 +28,8 @@ class HopRestController {
     }
 
     @GetMapping(value = "/hop/{id}")
-    Hop findById(@PathVariable Long id) {
-        return hopService.findById(id);
+    Hop findOne(@PathVariable Long id) {
+        return hopService.findOne(id);
 
     }
 

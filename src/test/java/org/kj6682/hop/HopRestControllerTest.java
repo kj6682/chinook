@@ -41,21 +41,21 @@ public class HopRestControllerTest {
     @Test
     public void findById_OK() {
 
-        when(hopService.findById(anyLong())).thenReturn( new Hop("title", "author", "type", "location" ) );
+        when(hopService.findOne(anyLong())).thenReturn( new Hop("title", "author", "type", "location" ) );
         HopRestController controller = new HopRestController(hopService);
 
-        assertNotNull(controller.findById(1L));
-        logger.info("findById_OK");
+        assertNotNull(controller.findOne(1L));
+        logger.info("findOne_OK");
     }
 
     @Test
     public void findById_NO_RESULTS() {
 
-        when(hopService.findById(anyLong())).thenReturn(null);
+        when(hopService.findOne(anyLong())).thenReturn(null);
         HopRestController controller = new HopRestController(hopService);
 
-        assertNull(controller.findById(1L));
-        logger.info("findById_NO_RESULTS");
+        assertNull(controller.findOne(1L));
+        logger.info("findOne_NO_RESULTS");
 
     }
 

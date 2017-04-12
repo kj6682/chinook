@@ -54,7 +54,7 @@ interface HopRepository extends Repository<Hop, Long> {
 
     Page<Hop> findAll(Pageable pageable);
 
-    Optional<Hop> findOne(Long id);
+    Optional<Hop> findById(Long id);
 
     Hop save(Hop hop);
 

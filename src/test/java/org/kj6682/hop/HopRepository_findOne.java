@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.kj6682.hop.Hop.*;
 
 /**
  * Created by luigi on 11/04/2017.
@@ -56,11 +57,12 @@ public class HopRepository_findOne {
     @Test
     public void should_return_optional() throws Exception {
 
+        Hop hop = this.repository.findById(-1L).orElse(new Hop(UNKNOWN_TITLE, UNKNOWN_AUTHOR, UNKNOWN_TYPE, UNKNOWN_LOCATION));
 
-        Hop hop = this.repository.findOne(-1L).orElse(new Hop("unkonw", "unkonw", "unkonw", "unkonw"));
-
-        System.out.println(hop);
-
+        assertThat(hop.getTitle()).isEqualTo(UNKNOWN_TITLE);
+        assertThat(hop.getAuthor()).isEqualTo(UNKNOWN_AUTHOR);
+        assertThat(hop.getType()).isEqualTo(UNKNOWN_TYPE);
+        assertThat(hop.getLocation()).isEqualTo(UNKNOWN_LOCATION);
     }
 
 

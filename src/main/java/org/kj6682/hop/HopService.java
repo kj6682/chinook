@@ -2,7 +2,9 @@ package org.kj6682.hop;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
+import static org.kj6682.hop.Hop.*;
 
 
 import java.util.List;
@@ -26,8 +28,13 @@ class HopService {
         this.hopRepository = hopRepository;
     }
 
-    Hop findById(Long id) {
-        return hopRepository.findOne(id).orElse(new Hop("unkown", "unknown", "nowhere", "nothing"));
+    Hop findOne(Long id) {
+        Assert.notNull(id, "A reasonable id is necessary when searching for one specific Hop");
+        return hopRepository.findById(id)
+                .orElse(new Hop(UNKNOWN_TITLE,
+                                UNKNOWN_AUTHOR,
+                                UNKNOWN_LOCATION,
+                                UNKNOWN_TYPE));
 
     }
 

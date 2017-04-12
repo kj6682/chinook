@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -55,16 +56,24 @@ public class HopRepository_findOne {
 
 
     @Test
-    public void should_return_optional() throws Exception {
+    public void should_return_optional_with_null_value() throws Exception {
 
-        Hop hop = this.repository.findById(-1L).orElse(new Hop(UNKNOWN_TITLE, UNKNOWN_AUTHOR, UNKNOWN_TYPE, UNKNOWN_LOCATION));
+        Optional<Hop> hop = this.repository.findById(-1L);
 
-        assertThat(hop.getTitle()).isEqualTo(UNKNOWN_TITLE);
-        assertThat(hop.getAuthor()).isEqualTo(UNKNOWN_AUTHOR);
-        assertThat(hop.getType()).isEqualTo(UNKNOWN_TYPE);
-        assertThat(hop.getLocation()).isEqualTo(UNKNOWN_LOCATION);
+        assertThat(hop.isPresent()).isEqualTo(false);
+
     }
 
+    @Test
+    public void should_return_optional_with_valid_value() throws Exception {
+
+        Long id = this.repository.findAll().get(0).getId();
+
+        Optional<Hop> hop = this.repository.findById(id);
+
+        assertThat(hop.get()).isNotNull();
+
+    }
 
 }
 //:)

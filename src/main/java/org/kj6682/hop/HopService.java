@@ -33,8 +33,8 @@ class HopService {
         return hopRepository.findById(id)
                 .orElse(new Hop(UNKNOWN_TITLE,
                                 UNKNOWN_AUTHOR,
-                                UNKNOWN_LOCATION,
-                                UNKNOWN_TYPE));
+                                UNKNOWN_TYPE,
+                                UNKNOWN_LOCATION));
 
     }
 

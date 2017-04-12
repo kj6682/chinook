@@ -22,14 +22,17 @@ class HopService {
 
     @Autowired
     void setHopRepository(HopRepository hopRepository){
+
         this.hopRepository = hopRepository;
     }
+
     Hop findById(Long id) {
-        return hopRepository.findOne(id);
+        return hopRepository.findOne(id).orElse(new Hop("unkown", "unknown", "nowhere", "nothing"));
 
     }
 
     List<Hop> findAll() {
+
         return hopRepository.findAll();
     }
 

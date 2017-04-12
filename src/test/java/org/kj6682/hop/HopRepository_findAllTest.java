@@ -135,6 +135,8 @@ public class HopRepository_findAllTest {
 
         assertThat(page).isNotNull();
         assertThat(page.getSize()).isEqualTo(7);
+        assertThat(page.getNumberOfElements()).isEqualTo(2);
+
         assertThat(page.getTotalElements()).isEqualTo(MAX_ITEMS);
 
 

@@ -1,6 +1,8 @@
 package org.kj6682.hop;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -47,23 +49,40 @@ class HopService {
     List<Hop> find(String search4me) {
 
         if (StringUtils.isEmpty(search4me)) {
-            return hopRepository.findAll();
+                return hopRepository.findAll();
         }
 
         return hopRepository.searchByAuthorOrTitle(search4me);
     }
 
-    void insertOne(String title, String author, String type, String location) {
+    List<Hop> find(String search4me, Pageable pageable) {
+
+        if (StringUtils.isEmpty(search4me)) {
+            return hopRepository.findAll(pageable).getContent();
+        }
+
+        return hopRepository.searchByAuthorOrTitle(search4me, pageable).getContent();
+    }
+
+    Hop insertOne(String title, String author, String type, String location) {
 
         Hop hop = new Hop(title, author, type, location);
         Assert.notNull(hop);
 
-        hopRepository.save(hop);
+        Hop result = hopRepository.save(hop);
+        Assert.notNull(result);
+
+        return result;
     }
 
     void deleteOne(Long id) {
         Assert.notNull(id, "A reasonable id is necessary when searching for one specific Hop");
         hopRepository.delete(id);
+    }
+
+    public Page<Hop> findPage(String search4me, Pageable pageable) {
+        return hopRepository.findAll(pageable);
+
     }
 }//:)
 

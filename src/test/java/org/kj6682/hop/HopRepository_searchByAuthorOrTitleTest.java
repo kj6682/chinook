@@ -1,8 +1,10 @@
 package org.kj6682.hop;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -28,6 +30,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  *
  */
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class HopRepository_searchByAuthorOrTitleTest {
@@ -48,7 +52,7 @@ public class HopRepository_searchByAuthorOrTitleTest {
     }
 
     @Test
-    public void given_author_or_title__should_return_a_list_of_hops() throws Exception {
+    public void givenAuthorOrTitleShouldReturnAListOfHops() throws Exception {
 
         List<Hop> hops = this.repository.searchByAuthorOrTitle("kafka");
 
@@ -63,7 +67,7 @@ public class HopRepository_searchByAuthorOrTitleTest {
     }
 
     @Test
-    public void given_lower_case_arguments__should_return_a_list_of_hops() throws Exception {
+    public void givenLowerCaseArgumentsShouldReturnAListOfHops() throws Exception {
 
         List<Hop> hops = this.repository.searchByAuthorOrTitle("kafka");
 
@@ -80,7 +84,7 @@ public class HopRepository_searchByAuthorOrTitleTest {
     }
 
     @Test
-    public void given_upper_case_arguments__should_return_an_empty_list() throws Exception {
+    public void givenUpperCaseArgumentsShouldReturnAnEmptyListOfHops() throws Exception {
 
         List<Hop> hops = this.repository.searchByAuthorOrTitle("KAFKA");
 
@@ -92,7 +96,7 @@ public class HopRepository_searchByAuthorOrTitleTest {
 
 
     @Test
-    public void given_partial_arguments__should_return_a_list_of_hops() throws Exception {
+    public void givenPartialArgumentsShouldReturnAListOfHops() throws Exception {
 
         List<Hop> hops = this.repository.searchByAuthorOrTitle("kaf");
 
@@ -106,7 +110,7 @@ public class HopRepository_searchByAuthorOrTitleTest {
     }
 
     @Test
-    public void given_wrong_match__should_return_an_empty_list() throws Exception{
+    public void givenWrongMatchShouldReturnAnEmptyListOfHops() throws Exception{
 
         List<Hop> hops = this.repository.searchByAuthorOrTitle("Bubbles");
 
@@ -115,7 +119,7 @@ public class HopRepository_searchByAuthorOrTitleTest {
     }
 
     @Test
-    public void given_no_arguments__should_return_the_full_list_of_hops() throws Exception{
+    public void givenNoArgumentsShouldReturnTheFullListOfHops() throws Exception{
 
         List<Hop> hops = this.repository.searchByAuthorOrTitle("");
 

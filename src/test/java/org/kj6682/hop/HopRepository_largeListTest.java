@@ -1,8 +1,10 @@
 package org.kj6682.hop;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -11,11 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,12 +32,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * No further documentation should be necessary as reading though this test class
  * everything is explained
  */
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class HopRepository_findAllTest {
+public class HopRepository_largeListTest {
 
-    private final static Logger log = Logger.getLogger(HopRepository_findAllTest.class.getName());
+    private final static Logger log = Logger.getLogger(HopRepository_largeListTest.class.getName());
 
     public static final int MAX_ITEMS = 30;
     public static final int PAGE_SIZE = 10;
@@ -56,7 +56,7 @@ public class HopRepository_findAllTest {
     }
 
     @Test
-    public void should_return_the_full_list_of_hops() throws Exception {
+    public void shouldReturnTheFullListOfHops() throws Exception {
 
         List<Hop> hops = this.repository.findAll();
 
@@ -65,7 +65,7 @@ public class HopRepository_findAllTest {
     }
 
     @Test
-    public void should_return_page_one() throws Exception {
+    public void shouldReturnPage1() throws Exception {
 
         TestPageable pageable = new TestPageable(0, PAGE_SIZE);
 
@@ -82,7 +82,7 @@ public class HopRepository_findAllTest {
     }
 
     @Test
-    public void should_return_page_two() throws Exception {
+    public void shouldReturnPage2() throws Exception {
 
         TestPageable pageable = new TestPageable(1, PAGE_SIZE);
 
@@ -96,7 +96,7 @@ public class HopRepository_findAllTest {
     }
 
     @Test
-    public void should_return_page_three() throws Exception {
+    public void shouldReturnPage3() throws Exception {
 
         TestPageable pageable = new TestPageable(2, PAGE_SIZE);
 
@@ -112,7 +112,7 @@ public class HopRepository_findAllTest {
     }
 
     @Test
-    public void should_return_page_four() throws Exception {
+    public void shouldReturnPage4() throws Exception {
 
         TestPageable pageable = new TestPageable(3, PAGE_SIZE);
 
@@ -127,7 +127,7 @@ public class HopRepository_findAllTest {
     }
 
     @Test
-    public void should_return_page_five_of_seven_elements() throws Exception {
+    public void shouldReturnPage5of7Elements() throws Exception {
 
         TestPageable pageable = new TestPageable(4, 7);
 
@@ -139,6 +139,38 @@ public class HopRepository_findAllTest {
 
         assertThat(page.getTotalElements()).isEqualTo(MAX_ITEMS);
 
+
+    }
+
+    @Test
+    public void givenAuthorOrTitleShouldReturnPage1() throws Exception {
+
+        TestPageable pageable = new TestPageable(0, PAGE_SIZE);
+
+
+        Page<Hop> page = this.repository.searchByAuthorOrTitle("1", pageable);
+
+        assertThat(page).isNotNull();
+        assertThat(page.getNumberOfElements()).isEqualTo(10);
+        assertThat(page.getSize()).isEqualTo(PAGE_SIZE);
+        assertThat(page.getTotalElements()).isEqualTo(12);
+        assertThat(page.getTotalPages()).isEqualTo(2);
+
+    }
+
+    @Test
+    public void givenAuthorOrTitleShouldReturnPage2() throws Exception {
+
+        TestPageable pageable = new TestPageable(1, PAGE_SIZE);
+
+
+        Page<Hop> page = this.repository.searchByAuthorOrTitle("1", pageable);
+
+        assertThat(page).isNotNull();
+        assertThat(page.getNumberOfElements()).isEqualTo(2);
+        assertThat(page.getSize()).isEqualTo(PAGE_SIZE);
+        assertThat(page.getTotalElements()).isEqualTo(12);
+        assertThat(page.getTotalPages()).isEqualTo(2);
 
     }
 

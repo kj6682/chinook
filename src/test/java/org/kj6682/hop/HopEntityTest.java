@@ -1,9 +1,11 @@
 package org.kj6682.hop;
 
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -17,7 +19,14 @@ import org.springframework.test.context.junit4.SpringRunner;
  * It would have been better to define this class in a classic TDD approach to define the
  * error messages to be thrown on construction
  *
+ * after revising this
+ * https://dzone.com/articles/7-popular-unit-test-naming
+ * I changed my mind on test naming convention passing
+ * from method 1 (MethodName_StateUnderTest_ExpectedBehavior)
+ * to 4 (features to be tested)
+ *
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class HopEntityTest {
@@ -36,7 +45,7 @@ public class HopEntityTest {
 
 
     @Test
-    public void create___when_title_is_null_should_throw_exception() throws Exception {
+    public void givenTitleIsNullShouldThrowException() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage(ON_TITLE);
         new Hop(null, "author", "type", "location");
@@ -44,7 +53,7 @@ public class HopEntityTest {
     }
 
     @Test
-    public void create___when_title_is_empty_should_throw_exception() throws Exception {
+    public void givenTitleIsEmptyShouldThrowException() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage(ON_TITLE);
         new Hop("", "author", "type", "location");
@@ -52,42 +61,42 @@ public class HopEntityTest {
     }
 
     @Test
-    public void create___when_author_is_null_should_throw_exception() throws Exception {
+    public void givenAuthorIsNullShouldThrowException() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage(ON_AUTHOR);
         new Hop("title", null, "type", "location");
     }
 
     @Test
-    public void create___when_author_is_empty_should_throw_exception() throws Exception {
+    public void givenAuthorIsEmptyShouldThrowException() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage(ON_AUTHOR);
         new Hop("title", "", "type", "location");
     }
 
     @Test
-    public void create___when_type_is_null_should_throw_exception() throws Exception {
+    public void givenTypeIsNullShouldThrowException() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage("A" + ON_TYPE);
         new Hop("title", "author", null, "location");
     }
 
     @Test
-    public void create___when_type_is_empty_should_throw_exception() throws Exception {
+    public void givenTypeIsEmptyShouldThrowException() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage("A" + ON_TYPE);
         new Hop("title", "author", "", "location");
     }
 
     @Test
-    public void create___when_location_is_null_should_throw_exception() throws Exception {
+    public void givenLocationIsNullShouldThrowException() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage(ON_LOCATION);
         new Hop("title", "author", "type", null);
     }
 
     @Test
-    public void create___when_location_is_empty_should_throw_exception() throws Exception {
+    public void givenLocationIsEmptyShouldThrowException() throws Exception {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage(ON_LOCATION);
         new Hop("title", "author", "type", "");

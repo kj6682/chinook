@@ -63,5 +63,7 @@ interface HopRepository extends Repository<Hop, Long> {
     @Query("select u from Hop u where (lower(u.title) like %:search4me%) or (lower(u.author) like %:search4me%)")
     List<Hop> searchByAuthorOrTitle(@Param("search4me") String search4me);
 
+    @Query("select u from Hop u where (lower(u.title) like %:search4me%) or (lower(u.author) like %:search4me%)")
+    Page<Hop> searchByAuthorOrTitle(@Param("search4me") String search4me, Pageable pageable);
 
 }

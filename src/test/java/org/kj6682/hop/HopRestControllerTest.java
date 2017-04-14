@@ -2,7 +2,9 @@ package org.kj6682.hop;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
@@ -19,6 +21,8 @@ import static org.mockito.Mockito.*;
  * On the controller junit test there is no much to test actually.
  *
  */
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class HopRestControllerTest {
 
     private static final Logger logger =
@@ -39,44 +43,34 @@ public class HopRestControllerTest {
     }
 
     @Test
-    public void findById_OK() {
+    public void shouldFindOneElement() {
 
         when(hopService.findOne(anyLong())).thenReturn( new Hop("title", "author", "type", "location" ) );
         HopRestController controller = new HopRestController(hopService);
 
-        assertNotNull(controller.findOne(1L));
-        logger.info("findOne_OK");
-    }
-
-    @Test
-    public void findById_NO_RESULTS() {
-
-        when(hopService.findOne(anyLong())).thenReturn(null);
-        HopRestController controller = new HopRestController(hopService);
-
-        assertNull(controller.findOne(1L));
-        logger.info("findOne_NO_RESULTS");
+        assertNotNull(controller.get(1L));
 
     }
 
+
+
     @Test
-    public void find_OK() {
+    public void shouldFindTheListOfElements() {
 
         when(hopService.find(anyString())).thenReturn(listHops());
 
         HopRestController controller = new HopRestController(hopService);
 
-        assertNotNull(controller.find(""));
+        assertNotNull(controller.find("", null));
 
         verify(hopService, only()).find(anyString());
         verify(hopService, never()).findAll();
 
-        logger.info("find_OK");
-    }
+   }
 
 
     @Test
-    public void insert(){
+    public void shouldInsertOneElement(){
         HopRestController controller = new HopRestController(hopService);
 
         controller.create(new Hop());
@@ -86,23 +80,21 @@ public class HopRestControllerTest {
     }
 
     @Test
-    public void update(){
+    public void shouldUpdateOneElement(){
         HopRestController controller = new HopRestController(hopService);
 
         controller.update(1L, "title", "author", "book", "nowhere");
         verify(hopService, atMost(1)).deleteOne(anyLong());
         verify(hopService, atMost(1)).insertOne(anyString(), anyString(), anyString(), anyString());
-        logger.info("update_OK");
 
     }
 
     @Test
-    public void delete(){
+    public void shouldDeleteOneElement(){
         HopRestController controller = new HopRestController(hopService);
 
         controller.delete(1L);
         verify(hopService, only()).deleteOne(anyLong());
-        logger.info("delete_OK");
 
     }
 

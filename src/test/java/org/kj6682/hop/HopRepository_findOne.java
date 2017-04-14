@@ -1,8 +1,10 @@
 package org.kj6682.hop;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -32,7 +34,7 @@ import static org.kj6682.hop.Hop.*;
  * No further documentation should be necessary as reading though this test class
  * everything is explained
  */
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class HopRepository_findOne {
@@ -56,7 +58,7 @@ public class HopRepository_findOne {
 
 
     @Test
-    public void should_return_optional_with_null_value() throws Exception {
+    public void givenNullIdShouldReturnEmptyOptionalContent() throws Exception {
 
         Optional<Hop> hop = this.repository.findById(-1L);
 
@@ -65,7 +67,7 @@ public class HopRepository_findOne {
     }
 
     @Test
-    public void should_return_optional_with_valid_value() throws Exception {
+    public void givenValidIdShouldReturnOptionalWithValidHop() throws Exception {
 
         Long id = this.repository.findAll().get(0).getId();
 

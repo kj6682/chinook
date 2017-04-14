@@ -1,10 +1,8 @@
 package org.kj6682.hop;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
+import org.junit.runners.MethodSorters;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -28,6 +26,8 @@ import static org.mockito.Mockito.*;
  * <p>
  * If we define this class before the implementation of the HopService, we are granted to have a better desing ;)
  */
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class HopServiceTest {
 
     List<Hop> fullList;
@@ -61,7 +61,7 @@ public class HopServiceTest {
     }
 
     @Test
-    public void findOne___when_id_is_null_should_throw_IllegalArgumentException() throws Exception {
+    public void givenNullIdWhenFindingOneElementShouldThrowIllegalArgumentException() throws Exception {
 
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage("A reasonable id is necessary when searching for one specific Hop");
@@ -70,7 +70,7 @@ public class HopServiceTest {
     }
 
     @Test
-    public void deleteOne___when_id_is_null_should_throw_IllegalArgumentException() throws Exception {
+    public void givenNullIdWhenDeletingAnElementShouldThrowIllegalArgumentException() throws Exception {
 
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage("A reasonable id is necessary when searching for one specific Hop");
@@ -80,7 +80,7 @@ public class HopServiceTest {
 
 
     @Test
-    public void findOne___when_id_does_not_match_should_return_dummy_Hop() throws Exception {
+    public void givenUnknownIdWhenFindingOneElementShouldReturnADummyHop() throws Exception {
         Optional<Hop> optional = Optional.ofNullable(null);
         given(this.hopRepository.findById(anyLong())).willReturn(optional);
 
@@ -93,7 +93,7 @@ public class HopServiceTest {
     }
 
     @Test
-    public void findOne___when_id_does_match_should_return_valid_Hop() throws Exception {
+    public void givenIdWhenFindingOneElementShouldReturnAValidHop() throws Exception {
         Optional<Hop> optional = Optional.of(new Hop("title", "author", "type", "location"));
 
         given(this.hopRepository.findById(anyLong())).willReturn(optional);
@@ -110,7 +110,7 @@ public class HopServiceTest {
     }
 
     @Test
-    public void find___with_empty_argument_should_return_the_whole_list_of_Hops() {
+    public void givenEmptyArgumentsWhenFindingAListElementsShouldReturnTheWholeListOfHops() {
 
         given(this.hopRepository.findAll()).willReturn(fullList);
         given(this.hopRepository.searchByAuthorOrTitle(any())).willReturn(partialList);
@@ -127,7 +127,7 @@ public class HopServiceTest {
     }
 
     @Test
-    public void find___with_valid_argument_should_return_a_list_of_Hops() {
+    public void givenGoodArgumentsWhenFindingAListShouldReturnAListOfHops() {
         given(this.hopRepository.findAll()).willReturn(fullList);
         given(this.hopRepository.searchByAuthorOrTitle(any())).willReturn(partialList);
 
@@ -143,7 +143,7 @@ public class HopServiceTest {
     }
 
     @Test
-    public void insert___with_invalid_arguments_should_throw_exception() {
+    public void givenInvalidParameterWhenInsertingShouldThrowException() {
         this.thrown.expect(IllegalArgumentException.class);
         this.thrown.expectMessage("A reasonable title is necessary when creating a Hop");
 
@@ -154,18 +154,21 @@ public class HopServiceTest {
     }
 
     @Test
-    public void insert___should_return_silently() {
+    public void insertShouldReturnTheElementWithItsId() {
         given(this.hopRepository.save(any())).willAnswer(RETURNS_MOCKS);
 
-        this.service.insertOne("title", "author", "type", "location");
+        Hop hop = this.service.insertOne("title", "author", "type", "location");
 
         verify(this.hopRepository, atMost(1)).save(any());
         verifyNoMoreInteractions(this.hopRepository);
 
+        assertThat(hop).isNotNull();
+        assertThat(hop.getId()).isNotNull();
+
     }
 
     @Test
-    public void delete___should_return_silently() {
+    public void deleteShouldReturnSilently() {
         doNothing().when(this.hopRepository).delete(anyLong());
 
         this.service.deleteOne(anyLong());
@@ -176,7 +179,7 @@ public class HopServiceTest {
     }
 
     @Test
-    public void findAll___should_return_the_whole_list_of_Hops(){
+    public void shouldReturnTheWholeListOfHops(){
         given(this.hopRepository.findAll()).willReturn(fullList);
 
         this.service.findAll();

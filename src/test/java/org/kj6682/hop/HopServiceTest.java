@@ -5,7 +5,12 @@ import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +46,128 @@ public class HopServiceTest {
 
     private HopService service;
 
+    Pageable pageable = new Pageable() {
+        @Override
+        public int getPageNumber() {
+            return 0;
+        }
+
+        @Override
+        public int getPageSize() {
+            return 0;
+        }
+
+        @Override
+        public int getOffset() {
+            return 0;
+        }
+
+        @Override
+        public Sort getSort() {
+            return null;
+        }
+
+        @Override
+        public Pageable next() {
+            return null;
+        }
+
+        @Override
+        public Pageable previousOrFirst() {
+            return null;
+        }
+
+        @Override
+        public Pageable first() {
+            return null;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return false;
+        }
+    };
+    Page page = new Page() {
+        @Override
+        public int getTotalPages() {
+            return 1;
+        }
+
+        @Override
+        public long getTotalElements() {
+            return partialList.size();
+        }
+
+        @Override
+        public Page map(Converter converter) {
+            return null;
+        }
+
+        @Override
+        public int getNumber() {
+            return 0;
+        }
+
+        @Override
+        public int getSize() {
+            return partialList.size();
+        }
+
+        @Override
+        public int getNumberOfElements() {
+            return partialList.size();
+        }
+
+        @Override
+        public List getContent() {
+            return partialList;
+        }
+
+        @Override
+        public boolean hasContent() {
+            return true;
+        }
+
+        @Override
+        public Sort getSort() {
+            return null;
+        }
+
+        @Override
+        public boolean isFirst() {
+            return true;
+        }
+
+        @Override
+        public boolean isLast() {
+            return false;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return false;
+        }
+
+        @Override
+        public Pageable nextPageable() {
+            return null;
+        }
+
+        @Override
+        public Pageable previousPageable() {
+            return null;
+        }
+
+        @Override
+        public Iterator iterator() {
+            return partialList.iterator();
+        }
+    };
 
     @Before
     public void setup() {
@@ -127,7 +254,7 @@ public class HopServiceTest {
     }
 
     @Test
-    public void givenGoodArgumentsWhenFindingAListShouldReturnAListOfHops() {
+    public void shouldReturnAPartialListOfHops() {
         given(this.hopRepository.findAll()).willReturn(fullList);
         given(this.hopRepository.searchByAuthorOrTitle(any())).willReturn(partialList);
 
@@ -185,6 +312,34 @@ public class HopServiceTest {
         this.service.find(null, null);
 
         verify(this.hopRepository, atMost(1)).findAll();
+        verifyNoMoreInteractions(this.hopRepository);
+    }
+
+    @Test
+    public void givenPaginationShouldReturnAPartialListOfHops(){
+
+        given(this.hopRepository.findAll()).willReturn(null);
+        given(this.hopRepository.searchByAuthorOrTitle(anyString())).willReturn(null);
+        given(this.hopRepository.searchByAuthorOrTitle(anyString(),any())).willReturn(page);
+
+        this.service.find("test", pageable);
+
+        verify(this.hopRepository, atMost(1)).searchByAuthorOrTitle(anyString(), any());
+        verifyNoMoreInteractions(this.hopRepository);
+    }
+
+    @Test
+    public void givenPaginationShouldReturnTheFullListOfHops(){
+
+        given(this.hopRepository.findAll()).willReturn(null);
+        given(this.hopRepository.findAll(any())).willReturn(page);
+
+        given(this.hopRepository.searchByAuthorOrTitle(anyString())).willReturn(null);
+        given(this.hopRepository.searchByAuthorOrTitle(anyString(),any())).willReturn(null);
+
+        this.service.find("", pageable);
+
+        verify(this.hopRepository, atMost(1)).findAll(any());
         verifyNoMoreInteractions(this.hopRepository);
     }
 }

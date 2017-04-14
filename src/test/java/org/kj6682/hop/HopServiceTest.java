@@ -115,7 +115,7 @@ public class HopServiceTest {
         given(this.hopRepository.findAll()).willReturn(fullList);
         given(this.hopRepository.searchByAuthorOrTitle(any())).willReturn(partialList);
 
-        List<Hop> list = this.service.find(null);
+        List<Hop> list = this.service.find(null, null);
 
         verify(this.hopRepository, atMost(1)).findAll();
         verify(this.hopRepository, never()).searchByAuthorOrTitle(any());
@@ -131,7 +131,7 @@ public class HopServiceTest {
         given(this.hopRepository.findAll()).willReturn(fullList);
         given(this.hopRepository.searchByAuthorOrTitle(any())).willReturn(partialList);
 
-        List<Hop> list = this.service.find("search4me");
+        List<Hop> list = this.service.find("search4me", null);
 
         verify(this.hopRepository, never()).findAll();
         verify(this.hopRepository, atMost(1)).searchByAuthorOrTitle(any());
@@ -182,7 +182,7 @@ public class HopServiceTest {
     public void shouldReturnTheWholeListOfHops(){
         given(this.hopRepository.findAll()).willReturn(fullList);
 
-        this.service.findAll();
+        this.service.find(null, null);
 
         verify(this.hopRepository, atMost(1)).findAll();
         verifyNoMoreInteractions(this.hopRepository);

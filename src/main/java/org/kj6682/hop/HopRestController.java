@@ -38,8 +38,6 @@ class HopRestController {
     }
 
 
-
-
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
                     value = "Results page you want to retrieve (0..N)"),
@@ -54,9 +52,6 @@ class HopRestController {
     List<Hop> find(@RequestParam(value = "search4me", required = false) String search4me,
                    Pageable pageable) {
 
-        if(pageable == null){
-            return hopService.find(search4me);
-        }
         return hopService.find(search4me, pageable);
 
     }

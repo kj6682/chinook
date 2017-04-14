@@ -57,14 +57,13 @@ public class HopRestControllerTest {
     @Test
     public void shouldFindTheListOfElements() {
 
-        when(hopService.find(anyString())).thenReturn(listHops());
+        when(hopService.find(anyString(), any())).thenReturn(listHops());
 
         HopRestController controller = new HopRestController(hopService);
 
         assertNotNull(controller.find("", null));
 
-        verify(hopService, only()).find(anyString());
-        verify(hopService, never()).findAll();
+        verify(hopService, only()).find(anyString(), any());
 
    }
 

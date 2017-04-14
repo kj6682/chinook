@@ -40,28 +40,24 @@ class HopService {
 
     }
 
-    List<Hop> findAll() {
-
-        return hopRepository.findAll();
-    }
-
-
-    List<Hop> find(String search4me) {
-
-        if (StringUtils.isEmpty(search4me)) {
-                return hopRepository.findAll();
-        }
-
-        return hopRepository.searchByAuthorOrTitle(search4me);
-    }
-
     List<Hop> find(String search4me, Pageable pageable) {
 
         if (StringUtils.isEmpty(search4me)) {
-            return hopRepository.findAll(pageable).getContent();
+            return findAll(pageable);
+        }
+
+        if (pageable == null){
+            return hopRepository.searchByAuthorOrTitle(search4me);
         }
 
         return hopRepository.searchByAuthorOrTitle(search4me, pageable).getContent();
+    }
+
+    List<Hop> findAll(Pageable pageable) {
+        if (pageable == null){
+            return hopRepository.findAll();
+        }
+        return hopRepository.findAll(pageable).getContent();
     }
 
     Hop insertOne(String title, String author, String type, String location) {
@@ -80,9 +76,5 @@ class HopService {
         hopRepository.delete(id);
     }
 
-    public Page<Hop> findPage(String search4me, Pageable pageable) {
-        return hopRepository.findAll(pageable);
-
-    }
 }//:)
 

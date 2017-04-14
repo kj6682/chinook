@@ -168,6 +168,87 @@ public class HopServiceTest {
             return partialList.iterator();
         }
     };
+    Page fullpage = new Page() {
+        @Override
+        public int getTotalPages() {
+            return 1;
+        }
+
+        @Override
+        public long getTotalElements() {
+            return fullList.size();
+        }
+
+        @Override
+        public Page map(Converter converter) {
+            return null;
+        }
+
+        @Override
+        public int getNumber() {
+            return 0;
+        }
+
+        @Override
+        public int getSize() {
+            return fullList.size();
+        }
+
+        @Override
+        public int getNumberOfElements() {
+            return fullList.size();
+        }
+
+        @Override
+        public List getContent() {
+            return fullList;
+        }
+
+        @Override
+        public boolean hasContent() {
+            return true;
+        }
+
+        @Override
+        public Sort getSort() {
+            return null;
+        }
+
+        @Override
+        public boolean isFirst() {
+            return true;
+        }
+
+        @Override
+        public boolean isLast() {
+            return false;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return false;
+        }
+
+        @Override
+        public Pageable nextPageable() {
+            return null;
+        }
+
+        @Override
+        public Pageable previousPageable() {
+            return null;
+        }
+
+        @Override
+        public Iterator iterator() {
+            return fullList.iterator();
+        }
+    };
 
     @Before
     public void setup() {
@@ -220,7 +301,7 @@ public class HopServiceTest {
     }
 
     @Test
-    public void givenIdWhenFindingOneElementShouldReturnAValidHop() throws Exception {
+    public void givenIdShouldReturnAValidHop() throws Exception {
         Optional<Hop> optional = Optional.of(new Hop("title", "author", "type", "location"));
 
         given(this.hopRepository.findById(anyLong())).willReturn(optional);
@@ -236,38 +317,6 @@ public class HopServiceTest {
         assertThat(hop.getLocation()).isEqualTo("location");
     }
 
-    @Test
-    public void givenEmptyArgumentsWhenFindingAListElementsShouldReturnTheWholeListOfHops() {
-
-        given(this.hopRepository.findAll()).willReturn(fullList);
-        given(this.hopRepository.searchByAuthorOrTitle(any())).willReturn(partialList);
-
-        List<Hop> list = this.service.find(null, null);
-
-        verify(this.hopRepository, atMost(1)).findAll();
-        verify(this.hopRepository, never()).searchByAuthorOrTitle(any());
-        verifyNoMoreInteractions(this.hopRepository);
-
-        assertThat(list).isNotEmpty();
-        assertThat(list.size()).isEqualTo(fullList.size());
-        assertThat(list.size()).isNotEqualTo(partialList.size());
-    }
-
-    @Test
-    public void shouldReturnAPartialListOfHops() {
-        given(this.hopRepository.findAll()).willReturn(fullList);
-        given(this.hopRepository.searchByAuthorOrTitle(any())).willReturn(partialList);
-
-        List<Hop> list = this.service.find("search4me", null);
-
-        verify(this.hopRepository, never()).findAll();
-        verify(this.hopRepository, atMost(1)).searchByAuthorOrTitle(any());
-        verifyNoMoreInteractions(this.hopRepository);
-
-        assertThat(list).isNotEmpty();
-        assertThat(list.size()).isEqualTo(partialList.size());
-        assertThat(list.size()).isNotEqualTo(fullList.size());
-    }
 
     @Test
     public void givenInvalidParameterWhenInsertingShouldThrowException() {
@@ -305,41 +354,78 @@ public class HopServiceTest {
 
     }
 
+
     @Test
-    public void shouldReturnTheWholeListOfHops(){
+    public void givenSearchItemShouldReturnAPartialListOfHops() {
         given(this.hopRepository.findAll()).willReturn(fullList);
+        given(this.hopRepository.searchByAuthorOrTitle(any())).willReturn(partialList);
 
-        this.service.find(null, null);
+        List<Hop> list = this.service.find("search4me", null);
 
-        verify(this.hopRepository, atMost(1)).findAll();
+        verify(this.hopRepository, never()).findAll();
+        verify(this.hopRepository, atMost(1)).searchByAuthorOrTitle(any());
         verifyNoMoreInteractions(this.hopRepository);
+
+        assertThat(list).isNotEmpty();
+        assertThat(list.size()).isEqualTo(partialList.size());
+        assertThat(list.size()).isNotEqualTo(fullList.size());
     }
 
     @Test
-    public void givenPaginationShouldReturnAPartialListOfHops(){
+    public void givenPaginationAndSearchItemShouldReturnAPartialListOfHops() {
 
         given(this.hopRepository.findAll()).willReturn(null);
         given(this.hopRepository.searchByAuthorOrTitle(anyString())).willReturn(null);
-        given(this.hopRepository.searchByAuthorOrTitle(anyString(),any())).willReturn(page);
+        given(this.hopRepository.searchByAuthorOrTitle(anyString(), any())).willReturn(page);
 
-        this.service.find("test", pageable);
+        List<Hop> list = this.service.find("search4me", pageable);
 
         verify(this.hopRepository, atMost(1)).searchByAuthorOrTitle(anyString(), any());
         verifyNoMoreInteractions(this.hopRepository);
+
+        assertThat(list).isNotEmpty();
+        assertThat(list.size()).isEqualTo(partialList.size());
+        assertThat(list.size()).isNotEqualTo(fullList.size());
     }
 
     @Test
-    public void givenPaginationShouldReturnTheFullListOfHops(){
+    public void givenNothingShouldReturnTheWholeListOfHops() {
+        given(this.hopRepository.findAll()).willReturn(fullList);
+
+        List<Hop> list = this.service.find("", null);
+        List<Hop> listNull = this.service.find(null, null);
+
+        verify(this.hopRepository, atMost(2)).findAll();
+        verifyNoMoreInteractions(this.hopRepository);
+
+        assertThat(list).isNotEmpty();
+        assertThat(list.size()).isEqualTo(fullList.size());
+        assertThat(list.size()).isNotEqualTo(partialList.size());
+        assertThat(listNull).isNotEmpty();
+        assertThat(listNull.size()).isEqualTo(fullList.size());
+        assertThat(listNull.size()).isNotEqualTo(partialList.size());
+    }
+
+    @Test
+    public void givenPaginationShouldReturnTheFullListOfHops() {
 
         given(this.hopRepository.findAll()).willReturn(null);
-        given(this.hopRepository.findAll(any())).willReturn(page);
+        given(this.hopRepository.findAll(any())).willReturn(fullpage);
 
         given(this.hopRepository.searchByAuthorOrTitle(anyString())).willReturn(null);
-        given(this.hopRepository.searchByAuthorOrTitle(anyString(),any())).willReturn(null);
+        given(this.hopRepository.searchByAuthorOrTitle(anyString(), any())).willReturn(null);
 
-        this.service.find("", pageable);
+        List<Hop> list = this.service.find("", pageable);
+        List<Hop> listNull = this.service.find(null, pageable);
 
-        verify(this.hopRepository, atMost(1)).findAll(any());
+        verify(this.hopRepository, atMost(2)).findAll(any());
         verifyNoMoreInteractions(this.hopRepository);
+
+        assertThat(list).isNotEmpty();
+        assertThat(list.size()).isEqualTo(fullList.size());
+        assertThat(list.size()).isNotEqualTo(partialList.size());
+        assertThat(listNull).isNotEmpty();
+        assertThat(listNull.size()).isEqualTo(fullList.size());
+        assertThat(listNull.size()).isNotEqualTo(partialList.size());
     }
 }

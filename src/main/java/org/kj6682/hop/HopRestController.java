@@ -55,7 +55,23 @@ class HopRestController {
         return hopService.find(search4me, pageable);
 
     }
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
+                    value = "Results page you want to retrieve (0..N)"),
+            @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query",
+                    value = "Number of records per page."),
+            @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query",
+                    value = "Sorting criteria in the format: property(,asc|desc). " +
+                            "Default sort order is ascending. " +
+                            "Multiple sort criteria are supported.")
+    })
+    @GetMapping(value = "/hopspaged")
+    Page<Hop> pagedFindAll(@RequestParam(value = "search4me", required = false) String search4me,
+                   Pageable pageable) {
 
+        return hopService.pagedFindAll( pageable );
+
+    }
 
     @PostMapping(value = "/hops")
     void create(@RequestBody Hop hop) {

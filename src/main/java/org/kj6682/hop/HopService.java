@@ -60,6 +60,11 @@ class HopService {
         return hopRepository.findAll(pageable).getContent();
     }
 
+    Page<Hop> pagedFindAll(Pageable pageable) {
+
+        return hopRepository.findAll( pageable );
+    }
+
     Hop insertOne(String title, String author, String type, String location) {
 
         Hop hop = new Hop(title, author, type, location);

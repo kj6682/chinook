@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <groupId>org.kj6682</groupId>
     <artifactId>chinook</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <modelVersion>4.0.0</modelVersion>
@@ -203,5 +203,13 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>dev</id>
+            <name>Local repository</name>
+            <url>file://${user.home}/.m2/repository</url>
+        </repository>
+    </distributionManagement>
 
 </project>

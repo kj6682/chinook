@@ -71,4 +71,4 @@ git rm -r --cached .idea
 ```
 
 ---
-That's all folks, this describes all the microservice by now.
+That's all folks, this describes all the application by now.

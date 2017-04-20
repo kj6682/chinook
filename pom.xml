@@ -43,7 +43,7 @@
             </dependencies>
         </profile>
         <profile>
-            <id>create</id>
+            <id>postgresql-create</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -68,7 +68,7 @@
             </dependencies>
         </profile>
         <profile>
-            <id>validate</id>
+            <id>postgresql-validate</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -98,7 +98,7 @@
                         <artifactId>maven-compiler-plugin</artifactId>
                         <configuration>
                             <excludes>
-                                <exclude>org/kj6682/hop/AccountRepositoryFiller.java</exclude>
+                                <exclude>org/kj6682/hop/DatabaseFiller.java</exclude>
                             </excludes>
                         </configuration>
                     </plugin>

@@ -10,7 +10,7 @@ spring:
   profiles: h2
 ---
 spring:
-  profiles: create
+  profiles: postgresql-create
   datasource:
     url: jdbc:postgresql://localhost:5432/catalog
     username: hr

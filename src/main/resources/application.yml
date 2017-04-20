@@ -1,24 +1,32 @@
 spring:
   application:
     name: hops
-  datasource:
-    url: jdbc:postgresql://localhost:5432/catalog
-    username: hr
-    password: hr
-    platform: POSTGRESQL
   jpa:
     show-sql: true
 server:
     port: 8082
 ---
 spring:
+  profiles: h2
+---
+spring:
   profiles: create
+  datasource:
+    url: jdbc:postgresql://localhost:5432/catalog
+    username: hr
+    password: hr
+    platform: POSTGRESQL
   jpa:
     hibernate:
       ddl-auto: create
 ---
 spring:
   profiles: default
+  datasource:
+    url: jdbc:postgresql://localhost:5432/catalog
+    username: hr
+    password: hr
+    platform: POSTGRESQL
   jpa:
     hibernate:
       ddl-auto: update

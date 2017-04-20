@@ -25,14 +25,15 @@ import java.util.stream.Stream;
 public class HopsterApplication {
 
     public static void main(String[] args) {
-		SpringApplication.run(HopsterApplication.class, args);
-	}
+        SpringApplication.run(HopsterApplication.class, args);
+    }
 
-	@Profile("create")
+    @Profile({"create", "h2"})
     @Component
-	static class AccountRepositoryFiller implements CommandLineRunner {
+    static class AccountRepositoryFiller implements CommandLineRunner {
 
         private final AccountRepository accountRepository;
+
 
         @Autowired
         public AccountRepositoryFiller(AccountRepository accountRepository) {
@@ -48,4 +49,27 @@ public class HopsterApplication {
         }
     }
 
+    @Profile({"h2"})
+    @Component
+    static class HopRepositoryFiller implements CommandLineRunner {
+
+        private final HopRepository hopRepository;
+
+        @Autowired
+        public HopRepositoryFiller(HopRepository hopRepository) {
+            this.hopRepository = hopRepository;
+        }
+
+        @Override
+        public void run(String... args) throws Exception {
+            System.out.println("******  running the SapleDataCLR *******");
+            Stream.of("1984,george orwell, book, shelf1",
+                    "der prozess,franz kafka, book, shelf1",
+                    "amerika,franz kafka, book, shelf1",
+                    "decameron,giovanni boccaccio, book, shelf2"
+                    )
+                    .map(x -> x.split(","))
+                    .forEach(tuple -> hopRepository.save(new Hop(tuple[0], tuple[1], tuple[2], tuple[3])));
+        }
+    }
 }

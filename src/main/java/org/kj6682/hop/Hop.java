@@ -1,4 +1,5 @@
 package org.kj6682.hop;
+import lombok.Data;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import javax.persistence.*;
  * Spring Data Postgres will map the class Hop into a collection called hop.
  * If you want to change the name of the collection, you can use
  */
-
+@Data
 @Entity
 class Hop {
 
@@ -53,62 +54,4 @@ class Hop {
         this.location = location;
     }
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Hop)) return false;
-
-        Hop hop = (Hop) o;
-
-        if (!getId().equals(hop.getId())) return false;
-        if (!getTitle().equals(hop.getTitle())) return false;
-        if (!getAuthor().equals(hop.getAuthor())) return false;
-        if (!getType().equals(hop.getType())) return false;
-        return getLocation().equals(hop.getLocation());
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getTitle().hashCode();
-        result = 31 * result + getAuthor().hashCode();
-        result = 31 * result + getType().hashCode();
-        result = 31 * result + getLocation().hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("Hop{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", title='").append(title).append('\'');
-        sb.append(", author='").append(author).append('\'');
-        sb.append(", type='").append(type).append('\'');
-        sb.append(", location='").append(location).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }

@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
+
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
@@ -48,22 +50,8 @@ import org.springframework.data.repository.query.Param;
  * http://blog.jhades.org/java-8-how-to-use-optional/
  *
  */
-interface HopRepository extends Repository<Hop, Long> {
+public interface HopRepository extends CrudRepository<Hop, Long> {
 
-    List<Hop> findAll();
-
-    Page<Hop> findAll(Pageable pageable);
-
-    Optional<Hop> findById(Long id);
-
-    Hop save(Hop hop);
-
-    void delete(Long id);
-
-    @Query("select u from Hop u where (lower(u.title) like %:search4me%) or (lower(u.author) like %:search4me%)")
-    List<Hop> searchByAuthorOrTitle(@Param("search4me") String search4me);
-
-    @Query("select u from Hop u where (lower(u.title) like %:search4me%) or (lower(u.author) like %:search4me%)")
-    Page<Hop> searchByAuthorOrTitle(@Param("search4me") String search4me, Pageable pageable);
+    List<Hop> findByTitleContainingOrAuthorContaining(@Param("title") String title, @Param("author") String author);
 
 }

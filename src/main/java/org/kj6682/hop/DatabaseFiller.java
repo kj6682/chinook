@@ -34,7 +34,7 @@ public class DatabaseFiller {
         }
     }
 
-    @Profile({"h2"})
+    @Profile({"h2", "no-security"})
     @Component
     class HopRepositoryFiller implements CommandLineRunner {
 

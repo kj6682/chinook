@@ -3,6 +3,9 @@ spring:
     name: hops
   jpa:
     show-sql: true
+  data:
+    rest:
+      base-path: /api
 server:
     port: 8082
 ---

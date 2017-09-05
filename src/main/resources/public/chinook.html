@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Chinook!</title>
+    <meta name="description" content="Chinook library">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header col-5">
+            <div class="logo"><img src="img/hop.png" class="logoimg" /></div>
+            <h1>Chinook</h1>
+            <p>This is a simple single page responsive application for tracking where my books, cds and other medias are stored.</p>
+            <p class="smalltext">this is a small text and should disappear in mobile</p>
+            <form>
+                <input type="text" class="searchInputText" name="search" placeholder="...">
+            </form>
+            <!-- Trigger/Open The Modal -->
+            <input id="addBtn" type="image" src="/img/add.png" alt="Add Media Item" width="48" height="48">
+            <!-- The Modal -->
+
+            <p class="smalltext">this is a small text and should disappear in mobile</p>
+        </div>
+        <div class="main col-7">
+            <p>This is the text above the list of results</p>
+            <div>
+                <table width="100%" border="1">
+                    <thead>
+                        <tr>
+                            <th>title</th>
+                            <th>author</th>
+                            <th>type</th>
+                            <th>location</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="hopTable">
+
+                        <tr>
+                            <td>1984</td>
+                            <td>george orwell</td>
+                            <td>book</td>
+                            <td>home</td>
+                            <td>
+                                <div class="deleteBtn"><img src="img/delete.png" /></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Der Prozess</td>
+                            <td>franz kafka</td>
+                            <td>book</td>
+                            <td>home</td>
+                            <td>
+                                <div class="deleteBtn"><img src="img/delete.png" /></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Decamerone</td>
+                            <td>giovanni boccaccio</td>
+                            <td>book</td>
+                            <td>home</td>
+                            <td>
+                                <div class="deleteBtn"><img src="img/delete.png" /></div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Spring Enterprise Recipies</td>
+                            <td>josh long, gavin mak</td>
+                            <td>book</td>
+                            <td>home</td>
+                            <td>
+                                <div class="deleteBtn"><img src="img/delete.png" /></div>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div id="react"></div>
+                <script src="built/bundle.js"></script>
+
+            </div>
+        </div>
+    </div>
+    <div id="createItemModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="close" class="close">&times;</span>
+            <p>This form is responsible for creating a new item in the chinook family.</p>
+            <form id="addHop" action="#">
+                <div>
+                    <label for="title"> </label>
+                    <input id="title" type="text" class="form-control" placeholder="title" />
+                </div>
+                <div>
+                    <label for="author"> </label>
+                    <input id="author" type="text" class="form-control" placeholder="author" />
+                </div>
+                <div>
+                    <label for="location"> </label>
+                    <input id="location" type="text" class="form-control" placeholder="location" />
+                </div>
+                <div>
+                    <label for="type"> </label>
+                    <input id="type" type="text" class="form-control" placeholder="type" />
+                </div>
+
+                <div id="addSubmitBtn" class='addSubmitBtn'>
+                    <p class="smalltext">click here to add a new item</p>
+                    <img src='img/add.png' alt='add'/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <script>
+        // Get the modal
+        var modal = document.getElementById('createItemModal');
+
+        // Get the button that opens the modal
+        var add = document.getElementById("addBtn");
+        var close = document.getElementById("close");
+
+        // When the user clicks on the button, open the modal 
+        add.onclick = function() {
+            modal.style.display = "block";
+        }
+
+
+        // When the user clicks on cancel (X), close the modal
+        close.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+    </script>
+</body>
+
+</html>

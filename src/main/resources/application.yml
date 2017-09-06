@@ -6,16 +6,13 @@ spring:
   data:
     rest:
       base-path: /api
-server:
-    port: 8082
 ---
 spring:
   profiles: h2
 ---
 spring:
-  profiles: postgresql-create
+  profiles: ddl-create
   datasource:
-    url: jdbc:postgresql://localhost:5432/catalog
     username: hr
     password: hr
     platform: POSTGRESQL
@@ -24,12 +21,18 @@ spring:
       ddl-auto: create
 ---
 spring:
-  profiles: default
+  profiles: ddl-update
   datasource:
-    url: jdbc:postgresql://localhost:5432/catalog
     username: hr
     password: hr
     platform: POSTGRESQL
   jpa:
     hibernate:
       ddl-auto: update
+---
+spring:
+  profiles: heroku
+  datasource:
+      url: ${JDBC_DATABASE_URL}
+      username: ${JDBC_DATABASE_USERNAME}
+      password: ${JDBC_DATABASE_PASSWORD}

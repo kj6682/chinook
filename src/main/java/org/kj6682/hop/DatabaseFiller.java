@@ -13,26 +13,6 @@ import java.util.stream.Stream;
  */
 @Configuration
 public class DatabaseFiller {
-    @Profile({"create", "h2"})
-    @Component
-    class AccountRepositoryFiller implements CommandLineRunner {
-
-        private final AccountRepository accountRepository;
-
-
-        @Autowired
-        public AccountRepositoryFiller(AccountRepository accountRepository) {
-            this.accountRepository = accountRepository;
-        }
-
-        @Override
-        public void run(String... args) throws Exception {
-            System.out.println("******  running the AccountRepositoryFiller *******");
-            Stream.of("john,lennon", "paul,mccarntey", "george,harrison", "ringo,starr")
-                    .map(x -> x.split(","))
-                    .forEach(tuple -> accountRepository.save(new Account(tuple[0], tuple[1], true)));
-        }
-    }
 
     @Profile({"h2", "no-security"})
     @Component

@@ -9,6 +9,7 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -28,7 +29,8 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
-@DataJpaTest
+
+@ActiveProfiles({"postgresql", "create"})
 public class HopEntityTest {
 
     public static final String ON_TITLE = "A reasonable title is necessary when creating a Hop";
@@ -40,8 +42,8 @@ public class HopEntityTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    @Autowired
-    private TestEntityManager entityManager;
+//    @Autowired
+//    private TestEntityManager entityManager;
 
 
     @Test

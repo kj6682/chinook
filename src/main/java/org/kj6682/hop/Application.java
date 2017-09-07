@@ -1,32 +1,30 @@
 package org.kj6682.hop;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 
 import java.util.stream.Stream;
 
 /**
- * Created by luigi on 20/04/2017.
+ * This is the main Application.
+ * It embeds its configuration in order to keep things clean and simple.
  */
-@Configuration
-public class DatabaseFiller {
 
-    @Profile({"h2", "no-security"})
-    @Component
-    class HopRepositoryFiller implements CommandLineRunner {
+@SpringBootApplication
+public class Application {
 
-        private final HopRepository hopRepository;
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
-        @Autowired
-        public HopRepositoryFiller(HopRepository hopRepository) {
-            this.hopRepository = hopRepository;
-        }
+    @Profile({"h2", "ddl-create"})
+    @Bean
+    CommandLineRunner initHops(HopRepository hopRepository) {
 
-        @Override
-        public void run(String... args) throws Exception {
+        return (evt) -> {
             System.out.println("******  running the HopRepositoryFiller *******");
             Stream.of("1984,george orwell, book, shelf1",
                     "der prozess,franz kafka, book, shelf1",
@@ -36,6 +34,6 @@ public class DatabaseFiller {
             )
                     .map(x -> x.split(","))
                     .forEach(tuple -> hopRepository.save(new Hop(tuple[0], tuple[1], tuple[2], tuple[3])));
-        }
+        };
     }
 }

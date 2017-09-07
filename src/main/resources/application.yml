@@ -11,21 +11,20 @@ spring:
   profiles: h2
 ---
 spring:
-  profiles: ddl-create
+  profiles: postgresql
   datasource:
     username: hr
     password: hr
     platform: POSTGRESQL
+---
+spring:
+  profiles: ddl-create
   jpa:
     hibernate:
       ddl-auto: create
 ---
 spring:
   profiles: ddl-update
-  datasource:
-    username: hr
-    password: hr
-    platform: POSTGRESQL
   jpa:
     hibernate:
       ddl-auto: update
